@@ -10,7 +10,7 @@ import {
   MessageCircle, Sparkles, Calendar, Package, Phone, Clock, Globe, Users, X
 } from "lucide-react";
 
-import lounge from "@/assets/lounge.jpg";
+import lounge from "@/assets/Algoma-Bear-Visit-21.avif";
 import judithImg from "@/assets/Toronto Station Chaplin And manager-Rev.Judith Alltree.png";
 
 // ==========================================

@@ -10,6 +10,12 @@ import {
 import heroImg from "@/assets/hero-port-toronto.jpg";
 import skyline from "@/assets/toronto-skyline.png";
 
+// Image imports for the new Gallery Section
+import eventImg1 from "@/assets/GlipmsOfevents.avif";
+import eventImg2 from "@/assets/GlipmsOfevents2.avif";
+import eventImg3 from "@/assets/GlipmsOfevents3.avif";
+import eventImg4 from "@/assets/GettingSupport.avif";
+
 const Index = () => {
   const [showAllEvents, setShowAllEvents] = useState(false);
 
@@ -254,9 +260,7 @@ const Index = () => {
               ))}
             </div>
 
-
           </div>
-
         </div>
       </section>
 
@@ -294,7 +298,6 @@ const Index = () => {
       </section>
 
       {/* ─────────── STRUCTURE DIAGRAM ─────────── */}
-      {/* ─────────── STRUCTURE DIAGRAM ─────────── */}
       <section className="py-20 md:py-24 bg-warm-gray">
         <div className="container-page">
           <div className="text-center max-w-2xl mx-auto">
@@ -327,7 +330,7 @@ const Index = () => {
                 { i: Anchor, tag: "Regional Hub", t: "MtS Southern Ontario", d: "Within Ontario, Mission to Seafarers Southern Ontario leads work across regional ports including Toronto, Hamilton, and Oshawa.", color: "navy", level: 2 },
                 { i: Building2, tag: "National Body", t: "MtS Canada", d: "Mission to Seafarers Canada provides the national leadership, fund development, partnerships, and support that strengthen stations across the country.", color: "navy", level: 3 },
                 { i: Globe2, tag: "Global Network", t: "The Mission to Seafarers", d: "Connected globally across more than 200 ports.", color: "navy-dark", level: 4 },
-              ].map(({ i: Icon, tag, t, d, color, level }, idx) => {
+              ].map(({ i: Icon, tag, t, d, color, level }) => {
                 const isCoral = color === "coral";
                 return (
                   <div key={tag} className="relative flex flex-col items-center text-center">
@@ -409,7 +412,7 @@ const Index = () => {
       </section>
 
       {/* ─────────── NEWS & UPCOMING EVENTS STRIP ─────────── */}
-      <section id="events" className="py-20 md:py-24 bg-white">
+      <section id="events" className="pt-20 md:pt-24 bg-white">
         <div className="container-page">
           <div className="flex flex-wrap items-end justify-between gap-6 mb-10">
             <div>
@@ -455,6 +458,26 @@ const Index = () => {
                 </div>
               </article>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ─────────── IMAGE GALLERY SECTION (NEW) ─────────── */}
+      <section className="pb-20 md:pb-24 pt-10 bg-white">
+        <div className="container-page">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-5">
+            <div className="overflow-hidden rounded-2xl shadow-sm group">
+              <img src={eventImg1} alt="Glimpse of events" className="w-full h-48 md:h-56 object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+            </div>
+            <div className="overflow-hidden rounded-2xl shadow-sm group">
+              <img src={eventImg2} alt="Glimpse of events" className="w-full h-48 md:h-56 object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+            </div>
+            <div className="overflow-hidden rounded-2xl shadow-sm group">
+              <img src={eventImg3} alt="Glimpse of events" className="w-full h-48 md:h-56 object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+            </div>
+            <div className="overflow-hidden rounded-2xl shadow-sm group">
+              <img src={eventImg4} alt="Getting Support" className="w-full h-48 md:h-56 object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+            </div>
           </div>
         </div>
       </section>
