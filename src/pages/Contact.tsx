@@ -8,7 +8,7 @@ import { Mail, Phone, MapPin, Clock, Send } from "lucide-react";
 
 // Using the About image as a temporary placeholder background 
 // since you mentioned you don't have a specific Contact image yet.
-import contactBg from "@/assets/About.jpg"; 
+import contactBg from "@/assets/contact-banner.jpg"; 
 
 const interests = [
   "Seafarer support",

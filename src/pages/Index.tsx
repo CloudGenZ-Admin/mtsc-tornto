@@ -11,6 +11,10 @@ import {
 import heroImg from "@/assets/hero-port-toronto.jpg";
 import skyline from "@/assets/toronto-skyline.png";
 
+// New background image imports
+import waterImg from "@/assets/water1.jpg";
+import seaImg from "@/assets/sea1.jpg";
+
 // Image imports for the new Gallery Section
 import eventImg1 from "@/assets/GlipmsOfevents.avif";
 import eventImg2 from "@/assets/GlipmsOfevents2.avif";
@@ -64,17 +68,23 @@ const Index = () => {
   return (
     <>
       {/* ─────────── HERO ─────────── */}
-      <section className="relative bg-gradient-warm overflow-hidden">
-        <div className="absolute -top-32 -right-32 h-96 w-96 rounded-full bg-coral/10 blur-3xl" />
-        <div className="absolute top-1/3 -left-20 h-72 w-72 rounded-full bg-navy/10 blur-3xl" />
+      <section 
+        className="relative overflow-hidden bg-cover bg-center bg-no-repeat bg-white"
+        style={{ backgroundImage: `url("${seaImg}")` }}
+      >
+        {/* Lowered opacity to 60% so the sea image clearly shows through */}
+        <div className="absolute inset-0 bg-white/60 backdrop-blur-[2px]" />
 
-        <div className="container-page relative pt-12 pb-14 md:pt-20 md:pb-20 lg:pt-24 lg:pb-24">
+        <div className="absolute -top-32 -right-32 h-96 w-96 rounded-full bg-coral/10 blur-3xl z-0" />
+        <div className="absolute top-1/3 -left-20 h-72 w-72 rounded-full bg-navy/10 blur-3xl z-0" />
+
+        <div className="container-page relative z-10 pt-12 pb-14 md:pt-20 md:pb-20 lg:pt-24 lg:pb-24">
           <div className="grid lg:grid-cols-12 gap-10 lg:gap-12 items-center">
 
             {/* Left Column: Text Content */}
             <div className="lg:col-span-7 animate-fade-in-up">
-              <span className="eyebrow">Mission to Seafarers · Toronto</span>
-              <h1 className="mt-5 text-[2.25rem] sm:text-5xl lg:text-[3.75rem] font-extrabold leading-[1.05] text-navy tracking-tight">
+              <span className="eyebrow bg-white/50 backdrop-blur inline-block px-2 py-1 rounded-md">Mission to Seafarers · Toronto</span>
+              <h1 className="mt-5 text-[2.25rem] sm:text-5xl lg:text-[3.75rem] font-extrabold leading-[1.05] text-navy tracking-tight drop-shadow-sm">
                 A Global Lifeline with a {" "}
                 <span className="relative inline-block text-coral whitespace-nowrap">
                   Local Heart
@@ -83,8 +93,8 @@ const Index = () => {
                   </svg>
                 </span>
               </h1>
-              <p className="mt-6 text-lg md:text-xl text-text-mid leading-relaxed max-w-2xl">
-                <strong className="text-navy font-semibold text-xl md:text-2xl block mb-6">
+              <p className="mt-6 text-lg md:text-xl text-navy/90 leading-relaxed max-w-2xl font-medium">
+                <strong className="text-navy font-bold text-xl md:text-2xl block mb-6 drop-shadow-sm">
                   Welcoming seafarers at the Port of Toronto with hospitality, practical support, and a place to belong while they are far from home.
                 </strong>
                 At the Port of Toronto, seafarers arrive after time at sea, sometimes for days, weeks and even months. Mission to Seafarers Toronto is here during that window. With practical support. With a place to step off the vessel. With people to speak to while they are ashore. We are a part of Mission to Seafarers Southern Ontario and Mission to Seafarers Canada, connected to a wider network that meets seafarers in ports around world.
@@ -93,7 +103,7 @@ const Index = () => {
                 <Button asChild size="lg" className="bg-coral hover:bg-coral-light text-white font-bold shadow-warm hover:shadow-warm-hover h-12 px-7">
                   <Link to="/contact">Contact the Station <ArrowRight className="ml-2 h-4 w-4" /></Link>
                 </Button>
-                <Button asChild variant="outline" size="lg" className="border-2 border-navy text-navy hover:bg-navy hover:text-white font-bold h-12 px-7">
+                <Button asChild variant="outline" size="lg" className="border-2 border-navy text-navy bg-white/50 backdrop-blur hover:bg-navy hover:text-white font-bold h-12 px-7">
                   <Link to="/get-involved#donate">Donate</Link>
                 </Button>
               </div>
@@ -140,7 +150,7 @@ const Index = () => {
         </div>
 
         {/* trust strip */}
-        <div className="border-t border-border bg-white/60 backdrop-blur">
+        <div className="border-t border-border bg-white/80 backdrop-blur relative z-10">
           <div className="container-page mx-auto py-6 grid grid-cols-1 md:grid-cols-3 gap-6 text-center justify-center">
             {[
               { n: "74,000+", l: "Operating Ships supported globally" },
@@ -479,18 +489,24 @@ const Index = () => {
       </section>
 
       {/* ─────────── DONATE / VOLUNTEER FOOTER BAND ─────────── */}
-      <section className="py-20 md:py-24 bg-warm-gray">
-        <div className="container-page">
+      <section 
+        className="relative py-20 md:py-24 bg-cover bg-center bg-no-repeat bg-warm-gray"
+        style={{ backgroundImage: `url("${waterImg}")` }}
+      >
+        {/* Lowered opacity to 60% so the water image clearly shows through */}
+        <div className="absolute inset-0 bg-white/60 backdrop-blur-[2px]" />
+        
+        <div className="container-page relative z-10">
           <div className="text-center max-w-3xl mx-auto mb-10">
-            <span className="eyebrow mx-auto">Support Locally. Give Nationally. Care Globally.</span>
-            <h2 className="mt-5 text-2xl md:text-3xl lg:text-4xl font-extrabold text-navy leading-tight">
+            <span className="eyebrow mx-auto bg-white/50 backdrop-blur px-2 py-1 rounded-md">Support Locally Care Globally.</span>
+            <h2 className="mt-5 text-2xl md:text-3xl lg:text-4xl font-extrabold text-navy leading-tight drop-shadow-sm">
               Whether you volunteer, donate, provide a haircut, or simply help us welcome a seafarer, you are part of a connected network of care reaching from Toronto to ports around the world.
             </h2>
           </div>
 
           <div className="grid md:grid-cols-2 gap-6">
             {/* Volunteer — local */}
-            <div className="rounded-3xl bg-white p-8 md:p-10 shadow-card hover:shadow-card-hover transition-all border-2 border-coral/15 flex flex-col">
+            <div className="rounded-3xl bg-white/95 backdrop-blur p-8 md:p-10 shadow-card hover:shadow-card-hover transition-all border-2 border-coral/15 flex flex-col">
               <span className="grid h-12 w-12 place-items-center rounded-xl bg-coral-pale text-coral">
                 <Users className="h-6 w-6" />
               </span>

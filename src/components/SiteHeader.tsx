@@ -10,7 +10,7 @@ const nav = [
   { to: "/about", label: "About" },
   { to: "/support", label: "Seafarer Support" },
   { to: "/get-involved", label: "Get Involved" },
-  { to: "/contact", label: "Contact" },
+  // { to: "/contact", label: "Contact" },
 ];
 
 export const SiteHeader = () => {
