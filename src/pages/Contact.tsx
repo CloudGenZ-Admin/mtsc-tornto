@@ -3,9 +3,12 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { PageHero } from "@/components/PageHero";
 import { toast } from "@/hooks/use-toast";
 import { Mail, Phone, MapPin, Clock, Send } from "lucide-react";
+
+// Using the About image as a temporary placeholder background 
+// since you mentioned you don't have a specific Contact image yet.
+import contactBg from "@/assets/About.jpg"; 
 
 const interests = [
   "Seafarer support",
@@ -36,12 +39,35 @@ const Contact = () => {
 
   return (
     <>
-      <PageHero
-        eyebrow="Contact"
-        title="Contact Mission to Seafarers Toronto"
-        description="We would love to hear from you."
-      />
+      {/* Hero Section - Matched to Navy Style */}
+      <section className="relative pt-28 pb-20 md:pt-36 md:pb-28 overflow-hidden bg-navy min-h-[45vh] flex items-center justify-center border-b border-navy-dark">
+        {/* Background Image & Overlays */}
+        <div className="absolute inset-0 z-0">
+          <img 
+            src={contactBg} 
+            alt="Contact Background Placeholder" 
+            className="w-full h-full object-cover object-center opacity-40 mix-blend-overlay" 
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-navy-dark via-navy/60 to-transparent" />
+        </div>
+        
+        {/* Hero Content */}
+        <div className="container-page relative z-10 text-center max-w-4xl mx-auto">
+          <div className="mb-6 flex justify-center">
+            <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-coral/20 text-coral-light text-xs font-extrabold uppercase tracking-widest border border-coral/30">
+              <Mail className="w-4 h-4 text-coral-light" /> Contact
+            </span>
+          </div>
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-6">
+            Contact Mission to Seafarers Toronto
+          </h1>
+          <p className="text-lg md:text-xl text-white/80 leading-relaxed font-medium">
+            We would love to hear from you.
+          </p>
+        </div>
+      </section>
 
+      {/* Main Content Section */}
       <section className="py-20 md:py-28 bg-white">
         <div className="container-page grid lg:grid-cols-12 gap-10 items-start">
           

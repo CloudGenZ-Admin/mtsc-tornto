@@ -2,6 +2,9 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { PageHero } from "@/components/PageHero";
 
+// Hero / About Image
+import aboutImg from "@/assets/About.jpg";
+
 // Images - Team
 import judithMainImg from "@/assets/Toronto Station Chaplin And manager-Rev.Judith Alltree.png";
 import aliciaImg from "@/assets/Alicia Hamming Navarrete.jpg";
@@ -37,17 +40,29 @@ const boardMembers = [
 const About = () => (
   <>
     {/* Hero Section */}
-   
+    <section className="relative pt-28 pb-20 md:pt-36 md:pb-28 overflow-hidden bg-navy min-h-[45vh] flex items-center justify-center border-b border-navy-dark">
+      {/* Background Image & Overlays */}
+      <div className="absolute inset-0 z-0">
+        <img 
+          src={aboutImg} 
+          alt="About Mission to Seafarers" 
+          className="w-full h-full object-cover object-center opacity-40 mix-blend-overlay" 
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-navy-dark via-navy/60 to-transparent" />
+      </div>
+      
+      {/* Hero Content */}
+      <div className="container-page relative z-10 text-center max-w-4xl mx-auto">
+        <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-tight">
+          Toronto Station History
+        </h1>
+      </div>
+    </section>
 
     {/* History */}
     <section className="py-20 md:py-28 bg-warm-gray">
       <div className="container-page max-w-4xl mx-auto">
-        <div className="text-center">
-          <h2 className="text-3xl md:text-4xl font-extrabold text-navy leading-tight">
-            Toronto station History
-          </h2>
-        </div>
-        <div className="mt-10 space-y-6 text-base md:text-lg text-text-mid leading-relaxed">
+        <div className="space-y-6 text-base md:text-lg text-text-mid leading-relaxed">
           <p>
             The Toronto Station of The Mission to Seafarers has been serving seafarers in the Port of Toronto since the early 1960s. It is believed the Mission first began around 1961 and, in its earliest years, operated in connection with the Lutheran Church in Toronto.
           </p>
@@ -211,7 +226,7 @@ const About = () => (
                 <Link to="/get-involved">Get Involved</Link>
               </Button>
               <Button asChild size="lg" variant="outline" className="border-2 border-white text-white hover:bg-white hover:text-navy font-bold h-12 px-7 bg-transparent">
-                <Link to="/get-involved#donate">Donate </Link>
+                <Link to="/get-involved#donate">Donate Now </Link>
               </Button>
             </div>
           </div>

@@ -11,19 +11,6 @@ const nav = [
   { to: "/support", label: "Seafarer Support" },
   { to: "/get-involved", label: "Get Involved" },
   { to: "/contact", label: "Contact" },
-  { 
-    to: "/newsletter", 
-    label: "Newsletter",
-    subItems: [
-      { to: "/newsletter", label: "May Newsletter (Overview)" },
-      { to: "/ship-visits", label: "Ship Visits" },
-      { to: "/women-in-maritime", label: "Women in Maritime" },
-      { to: "/hamilton-station", label: "Hamilton Station" },
-      { to: "/whats-ahead", label: "What's Ahead" },
-      { to: "/ways-to-get-involved-article", label: "Ways to Help" },
-      { to: "/announcements", label: "Announcements" },
-    ]
-  },
 ];
 
 export const SiteHeader = () => {
@@ -143,7 +130,7 @@ export const SiteHeader = () => {
         {/* Desktop CTA Buttons */}
         <div className="hidden lg:flex items-center gap-3">
           <Button asChild size="sm" className="bg-coral hover:bg-coral-light text-white font-bold shadow-warm hover:shadow-warm-hover">
-            <Link to="/contact">Contact Toronto</Link>
+            <Link to="/contact">Contact Us</Link>
           </Button>
         </div>
 
@@ -221,11 +208,11 @@ export const SiteHeader = () => {
             ))}
 
             <div className="flex flex-col gap-3 pt-4 border-t border-border mt-2">
-              <Button asChild variant="outline" className="border-2 border-navy text-navy font-bold w-full">
+              {/* <Button asChild variant="outline" className="border-2 border-navy text-navy font-bold w-full">
                 <Link to="/get-involved#donate">Donate</Link>
-              </Button>
+              </Button> */}
               <Button asChild className="bg-coral hover:bg-coral-light text-white font-bold w-full">
-                <Link to="/contact">Contact Toronto</Link>
+                <Link to="/contact">Contact Us</Link>
               </Button>
             </div>
           </div>

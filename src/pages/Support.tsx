@@ -12,6 +12,7 @@ import {
 
 import lounge from "@/assets/Algoma-Bear-Visit-21.avif";
 import judithImg from "@/assets/Toronto Station Chaplin And manager-Rev.Judith Alltree.png";
+import heroBg from "@/assets/SeasurferSupport.avif"; // Added new background image import
 
 // ==========================================
 // FORM COMPONENTS
@@ -119,6 +120,7 @@ const ParcelForm = ({ onClose }: { onClose: () => void }) => {
   );
 };
 
+// UPDATED: Added direct WhatsApp button below the form.
 const ChaplainForm = ({ onClose }: { onClose: () => void }) => {
   const [form, setForm] = useState({ name: "", contact: "", message: "" });
 
@@ -144,9 +146,27 @@ const ChaplainForm = ({ onClose }: { onClose: () => void }) => {
         <div><Label>WhatsApp or Email *</Label><Input required value={form.contact} onChange={e => setForm({ ...form, contact: e.target.value })} className="mt-1.5 bg-white" /></div>
         <div className="sm:col-span-2"><Label>Private Message</Label><Textarea rows={4} required value={form.message} onChange={e => setForm({ ...form, message: e.target.value })} className="mt-1.5 bg-white" /></div>
       </div>
-      <Button type="submit" size="lg" className="w-full bg-coral hover:bg-coral-light text-white font-bold h-12 flex gap-2 items-center justify-center">
-        Send Private Message
-      </Button>
+      
+      <div className="flex flex-col gap-3 mt-2">
+        <Button type="submit" size="lg" className="w-full bg-coral hover:bg-coral-light text-white font-bold h-12 flex gap-2 items-center justify-center">
+          Send Private Message
+        </Button>
+        
+        <div className="relative flex items-center py-2">
+          <div className="flex-grow border-t border-border"></div>
+          <span className="flex-shrink-0 px-4 text-text-mid text-sm font-medium uppercase tracking-wider">OR CONNECT DIRECTLY</span>
+          <div className="flex-grow border-t border-border"></div>
+        </div>
+        
+        <a 
+          href="https://wa.me/16472953219" 
+          target="_blank" 
+          rel="noreferrer" 
+          className="w-full bg-[#25D366] hover:bg-[#20b858] text-white font-bold h-12 flex gap-2 items-center justify-center rounded-md transition-colors"
+        >
+          <MessageCircle className="h-5 w-5" /> Message on WhatsApp
+        </a>
+      </div>
     </form>
   );
 };
@@ -194,7 +214,7 @@ const Support = () => {
     { id: 'haircut', icon: Scissors, title: "Book a Haircut", desc: "Simple booking form" },
     { id: 'parcel', icon: Package, title: "Send or Receive a Parcel", desc: "Instructions + request form" },
     { id: 'visit', icon: Ship, title: "Request a Ship Visit", desc: "Schedule a visit" },
-    { id: 'chaplain', icon: MessageCircle, title: "Message the Chaplain", desc: "Private message/support" },
+    { id: 'chaplain', icon: MessageCircle, title: "Message the Chaplain", desc: "Private message/support via Form or WhatsApp" }, // Updated desc
     { id: 'support', icon: Heart, title: "Request Support", desc: "General help (mental, practical, urgent)" }
   ];
 
@@ -218,36 +238,35 @@ const Support = () => {
 
   return (
     <>
-      {/* 1. Hero Section - UPDATED TO LIGHT UI */}
-      <section className="bg-warm-gray py-20 md:py-32 text-center relative overflow-hidden border-b border-border">
-        <div className="container-page relative z-10">
-          <div className="mb-5 flex justify-center">
-            <span className="eyebrow flex items-center gap-2">
-              <Heart className="w-5 h-5 text-coral" /> Seafarer Support
+      {/* 1. Hero Section - UPDATED TO LIGHT UI WITH BACKGROUND IMAGE */}
+
+
+      {/* 1. Hero Section - UPDATED TO NAVY UI */}
+      <section className="relative pt-28 pb-20 md:pt-36 md:pb-28 overflow-hidden bg-navy min-h-[45vh] flex items-center justify-center border-b border-navy-dark">
+        {/* Background Image & Overlays */}
+        <div className="absolute inset-0 z-0">
+          <img 
+            src={heroBg} 
+            alt="Seafarer Support Background" 
+            className="w-full h-full object-cover object-center opacity-40 mix-blend-overlay" 
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-navy-dark via-navy/60 to-transparent" />
+        </div>
+        
+        {/* Hero Content */}
+        <div className="container-page relative z-10 text-center max-w-4xl mx-auto">
+          <div className="mb-6 flex justify-center">
+            <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-coral/20 text-coral-light text-xs font-extrabold uppercase tracking-widest border border-coral/30">
+              <Heart className="w-4 h-4 text-coral-light" /> Seafarer Support
             </span>
           </div>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-navy mb-6">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-6">
             Support While You’re at Port
           </h1>
-          <p className="text-lg md:text-xl text-text-mid max-w-2xl mx-auto mb-10 leading-relaxed">
+          <p className="text-lg md:text-xl text-white/80 leading-relaxed font-medium">
             Wherever you’re from, you are welcome here.<br className="hidden md:block" />
             We’re here to support you with practical help, connection, and care while you’re in Toronto.
           </p>
-
-          <div className="flex flex-col sm:flex-row flex-wrap justify-center items-center gap-4 max-w-4xl mx-auto">
-            <Button onClick={() => scrollToSection('haircut')} size="lg" className="bg-coral hover:bg-coral-light text-white font-bold h-14 px-8 w-full sm:w-auto text-lg rounded-full shadow-md">
-              Book a Haircut
-            </Button>
-            <Button onClick={() => scrollToSection('visit')} size="lg" className="bg-navy hover:bg-navy-light text-white font-bold h-14 px-8 w-full sm:w-auto text-lg rounded-full shadow-md">
-              Request a Visit
-            </Button>
-            <Button onClick={() => scrollToSection('parcel')} variant="outline" size="lg" className="border-2 border-border text-navy  font-bold h-14 px-8 w-full sm:w-auto text-lg rounded-full bg-white shadow-sm">
-              Send a Parcel
-            </Button>
-            <Button onClick={() => scrollToSection('chaplain')} variant="outline" size="lg" className="border-2 border-border text-navy font-bold h-14 px-8 w-full sm:w-auto text-lg rounded-full bg-white shadow-sm">
-              <MessageCircle className="mr-2 h-5 w-5 text-coral" /> Message the Chaplain (647-295-3219)
-            </Button>
-          </div>
         </div>
       </section>
 
@@ -351,10 +370,10 @@ const Support = () => {
       {/* 5. Contact / Emergency Support */}
       <section className="py-16 bg-navy text-white">
         <div className="container-page text-center">
-          <h2 className="text-3xl md:text-4xl font-extrabold mb-10">Need Immediate Help?</h2>
+          <h2 className="text-3xl text-white md:text-4xl font-extrabold mb-10">Need Immediate Help?</h2>
           <div className="flex flex-col sm:flex-row justify-center items-center gap-4 md:gap-6">
             <a href="tel:+16472953219" className="flex items-center justify-center gap-3 bg-white/10 hover:bg-white/20 px-8 py-4 rounded-full transition-colors font-bold text-lg w-full sm:w-auto">
-              <Phone className="h-6 w-6" /> Phone: 647-295-3219
+              <Phone className="h-6 w-6" /> Phone: +1 647-295-3219
             </a>
             <a href="https://wa.me/16472953219" target="_blank" rel="noreferrer" className="flex items-center justify-center gap-3 bg-[#25D366] hover:bg-[#20b858] px-8 py-4 rounded-full transition-colors font-bold text-white text-lg w-full sm:w-auto">
               <MessageCircle className="h-6 w-6" /> WhatsApp
@@ -401,35 +420,40 @@ const Support = () => {
         </div>
       </section>
 
-      {/* 7. Language Accessibility */}
-      <section className="py-20 bg-coral text-white text-center">
-        <div className="container-page max-w-3xl">
-          <Globe className="h-16 w-16 mx-auto mb-6 text-white" />
-          <h2 className="text-3xl md:text-4xl font-extrabold mb-6 leading-tight">We Welcome Seafarers from Around the World</h2>
-          <p className="text-xl md:text-2xl text-white/90 font-medium leading-relaxed">
-            If English is not your first language, we will do our best to support you.
-          </p>
-        </div>
-      </section>
-
-      {/* 8. Trust / Human Touch */}
+      {/* 7 & 8. Language Accessibility & Support Team (Merged Sections) */}
       <section className="py-24 bg-warm-gray">
-        <div className="container-page text-center">
-          <h2 className="text-3xl md:text-4xl font-extrabold text-navy mb-6">Meet Your Support Team</h2>
-          <p className="text-xl text-text-mid max-w-2xl mx-auto mb-14 font-medium leading-relaxed">
-            Our team is here to welcome you, listen, and support you during your time in port.
-          </p>
-          
-          <div className="flex flex-col items-center justify-center max-w-sm mx-auto group">
-            <div className="w-48 h-48 mb-6 overflow-hidden rounded-full shadow-lg ring-8 ring-white transition-transform duration-300 group-hover:scale-105">
-              <img 
-                src={judithImg} 
-                alt="Rev. Judith Alltree" 
-                className="w-full h-full object-cover"
-              />
+        <div className="container-page">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            
+            {/* Trust / Human Touch */}
+            <div className="text-center lg:text-left">
+              <h2 className="text-3xl md:text-4xl font-extrabold text-navy mb-6">Meet Your Support Team</h2>
+              <p className="text-xl text-text-mid max-w-lg mx-auto lg:mx-0 mb-14 font-medium leading-relaxed">
+                Our team is here to welcome you, listen, and support you during your time in port.
+              </p>
+              
+              <div className="flex flex-col items-center lg:items-start group">
+                <div className="w-48 h-48 mb-6 overflow-hidden rounded-full shadow-lg ring-8 ring-white transition-transform duration-300 group-hover:scale-105">
+                  <img 
+                    src={judithImg} 
+                    alt="Rev. Judith Alltree" 
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <h3 className="text-2xl font-extrabold text-navy">Rev. Judith Alltree</h3>
+                <p className="text-coral font-bold mt-1 text-lg">Station Chaplain</p>
+              </div>
             </div>
-            <h3 className="text-2xl font-extrabold text-navy">Rev. Judith Alltree</h3>
-            <p className="text-coral font-bold mt-1 text-lg">Station Chaplain</p>
+
+            {/* Language Accessibility */}
+            <div className="bg-coral text-white rounded-3xl p-10 md:p-14 shadow-soft text-center lg:text-left h-full flex flex-col justify-center">
+              <Globe className="h-16 w-16 mb-6 text-white mx-auto lg:mx-0" />
+              <h2 className="text-3xl md:text-4xl font-extrabold mb-6 leading-tight">We Welcome Seafarers from Around the World</h2>
+              <p className="text-xl md:text-2xl text-white/90 font-medium leading-relaxed">
+                If English is not your first language, we will do our best to support you.
+              </p>
+            </div>
+
           </div>
         </div>
       </section>

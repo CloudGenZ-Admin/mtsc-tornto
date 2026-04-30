@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import {
   ArrowRight, Anchor, Wifi, Coffee, Heart, Scissors, Users, Globe2, HandHeart,
   Calendar, MapPin, Ship, Package, LifeBuoy, ShieldCheck, HeartHandshake, Building2, Home as HomeIcon, ChevronRight,
+  ChevronDown
 } from "lucide-react";
 
 // Image imports for the Hero Section
@@ -86,7 +87,7 @@ const Index = () => {
                 <strong className="text-navy font-semibold text-xl md:text-2xl block mb-6">
                   Welcoming seafarers at the Port of Toronto with hospitality, practical support, and a place to belong while they are far from home.
                 </strong>
-                At the Port of Toronto, seafarers arrive after time at sea, sometimes for days, weeks and even months. Mission to Seafarers Toronto is here during that window. With practical support. With a place to step off the vessel. With people to speak to while they are ashore. We are a part of Mission to Seafarers Southern Ontario and Mission to Seafarers Canada, connected to a wider network that meets seafarers in ports around the world.
+                At the Port of Toronto, seafarers arrive after time at sea, sometimes for days, weeks and even months. Mission to Seafarers Toronto is here during that window. With practical support. With a place to step off the vessel. With people to speak to while they are ashore. We are a part of Mission to Seafarers Southern Ontario and Mission to Seafarers Canada, connected to a wider network that meets seafarers in ports around world.
               </p>
               <div className="mt-8 flex flex-wrap gap-4">
                 <Button asChild size="lg" className="bg-coral hover:bg-coral-light text-white font-bold shadow-warm hover:shadow-warm-hover h-12 px-7">
@@ -118,17 +119,17 @@ const Index = () => {
                 </div>
               </div>
 
-              {/* Floating skyline accent */}
+              {/* Floating skyline accent (UPDATED to appear on TOP) */}
               <img
                 src={skyline}
                 alt=""
                 aria-hidden="true"
-                className="hidden md:block absolute -bottom-6 -left-8 lg:-left-12 w-48 lg:w-64 opacity-90 animate-float pointer-events-none"
+                className="hidden md:block absolute -top-10 -left-8 lg:-top-12 lg:-left-12 w-48 lg:w-64 opacity-90 animate-float pointer-events-none z-20"
                 loading="lazy"
               />
 
               {/* Stat badge */}
-              <div className="hidden sm:block absolute -top-4 -right-4 lg:-top-6 lg:-right-6 rounded-full bg-coral text-white px-5 py-4 shadow-warm rotate-[-6deg]">
+              <div className="hidden sm:block absolute top-10 -right-4 lg:top-14 lg:-right-6 rounded-full bg-coral text-white px-5 py-4 shadow-warm rotate-[-6deg] z-10">
                 <p className="text-[10px] font-bold uppercase tracking-widest opacity-90">Network</p>
                 <p className="text-2xl font-extrabold leading-none">200+</p>
                 <p className="text-[10px] font-bold opacity-90">Global Ports</p>
@@ -168,7 +169,7 @@ const Index = () => {
             </p>
           </div>
 
-          <div className="mt-14 grid md:grid-cols-3 gap-5">
+          <div className="mt-14 grid md:grid-cols-2 gap-5">
             {[
               {
                 i: Users,
@@ -178,15 +179,7 @@ const Index = () => {
                 cta: "See station services",
                 to: "/support",
               },
-              {
-                i: Scissors,
-                tag: "Personal Care",
-                title: "Haircuts & Wellness",
-                body: "A Small Service That Makes a Big Difference. Haircuts are available at the Toronto station by appointment for visiting seafarers.",
-                cta: "Book a haircut",
-                to: "/support#haircuts",
-                featured: true,
-              },
+              
               {
                 i: Package,
                 tag: "Logistics",
@@ -310,97 +303,100 @@ const Index = () => {
             </p>
           </div>
 
-          {/* Horizontal flow — desktop */}
-          <div className="mt-14 hidden lg:block">
-            <div className="relative grid grid-cols-4 gap-6">
-
-              {/* Visual Hierarchy Connector - Expanding Wedge to show Scale */}
-              <div className="absolute top-7 left-[12.5%] right-[12.5%] h-8 -translate-y-1/2 pointer-events-none flex flex-col justify-center z-0">
-                {/* Expanding funnel shape (narrow on left, wide on right) */}
-                <div
-                  className="w-full h-full bg-gradient-to-r from-coral/15 via-navy/10 to-navy-dark/15"
-                  style={{ clipPath: 'polygon(0 40%, 100% 0%, 100% 100%, 0 60%)' }}
-                />
-                {/* Core connection line */}
-                <div className="absolute top-1/2 left-0 w-full h-0.5 -translate-y-1/2 bg-gradient-to-r from-coral via-navy to-navy-dark" />
-              </div>
-
-              {[
-                { i: HomeIcon, tag: "Local Base", t: "Toronto Station", d: "At the Port of Toronto, that work becomes direct. Here, we offer seafarers a welcoming place where they can rest, connect with loved ones, access practical help, receive a haircut, and know that they are not alone.", color: "coral", level: 1 },
-                { i: Anchor, tag: "Regional Hub", t: "MtS Southern Ontario", d: "Within Ontario, Mission to Seafarers Southern Ontario leads work across regional ports including Toronto, Hamilton, and Oshawa.", color: "navy", level: 2 },
-                { i: Building2, tag: "National Body", t: "MtS Canada", d: "Mission to Seafarers Canada provides the national leadership, fund development, partnerships, and support that strengthen stations across the country.", color: "navy", level: 3 },
-                { i: Globe2, tag: "Global Network", t: "The Mission to Seafarers", d: "Connected globally across more than 200 ports.", color: "navy-dark", level: 4 },
-              ].map(({ i: Icon, tag, t, d, color, level }) => {
-                const isCoral = color === "coral";
-                return (
-                  <div key={tag} className="relative flex flex-col items-center text-center">
-
-                    {/* Icon */}
-                    <span
-                      className={`relative z-10 grid h-14 w-14 place-items-center rounded-full border-4 border-warm-gray shadow-card transition-transform duration-300 hover:scale-105 ${isCoral ? "bg-gradient-coral text-white" : "bg-white text-navy"
-                        }`}
-                    >
-                      <Icon className="h-6 w-6" />
-                    </span>
-
-                    {/* Scale Indicator Bar (Solves the "which is greater" issue) */}
-                    <div className="flex items-end gap-[3px] h-3.5 mt-5" aria-label={`Scope level ${level} of 4`}>
-                      {[1, 2, 3, 4].map((i) => (
-                        <div
-                          key={i}
-                          className={`w-[4px] rounded-sm ${i <= level ? (isCoral ? 'bg-coral' : 'bg-navy') : 'bg-navy/15'}`}
-                          style={{ height: `${40 + (i - 1) * 20}%` }}
-                        />
-                      ))}
-                    </div>
-
-                    <p className={`mt-2 text-[10px] font-extrabold uppercase tracking-widest ${isCoral ? "text-coral" : "text-navy"}`}>
-                      {tag}
-                    </p>
-                    <h3 className="mt-1.5 text-lg font-extrabold text-navy">{t}</h3>
-                    <p className="mt-2 text-sm text-text-mid leading-relaxed max-w-xs mx-auto">{d}</p>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-
-          {/* Vertical stack — mobile/tablet */}
-          <div className="mt-14 lg:hidden space-y-4">
-            {[
-              { i: HomeIcon, tag: "Local Base", t: "Toronto Station", d: "At the Port of Toronto, that work becomes direct. Here, we offer seafarers a welcoming place where they can rest, connect with loved ones, access practical help, receive a haircut, and know that they are not alone.", featured: true, level: 1 },
-              { i: Anchor, tag: "Regional Hub", t: "MtS Southern Ontario", d: "Within Ontario, Mission to Seafarers Southern Ontario leads work across regional ports including Toronto, Hamilton, and Oshawa.", level: 2 },
-              { i: Building2, tag: "National Body", t: "MtS Canada", d: "Mission to Seafarers Canada provides the national leadership, fund development, partnerships, and support that strengthen stations across the country.", level: 3 },
-              { i: Globe2, tag: "Global Network", t: "The Mission to Seafarers", d: "Connected globally across more than 200 ports.", level: 4 },
-            ].map(({ i: Icon, tag, t, d, featured, level }) => (
-              <div key={tag} className="flex items-start gap-4 rounded-2xl bg-white p-5 shadow-card">
-                <span className={`relative z-10 grid h-12 w-12 shrink-0 place-items-center rounded-xl ${featured ? "bg-gradient-coral text-white" : "bg-warm-gray text-navy"}`}>
-                  <Icon className="h-5 w-5" />
+          {/* Nested Vertical Hierarchy */}
+          <div className="mt-14 max-w-5xl mx-auto">
+            
+            {/* Layer 4: Global */}
+            <div className="rounded-[2rem] sm:rounded-[2.5rem] bg-navy-dark p-3 sm:p-5 md:p-8 shadow-xl text-white transition-all border border-navy/50">
+              <div className="flex flex-col sm:flex-row items-start gap-4 sm:gap-6 mb-2 px-2 sm:px-2">
+                <span className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-white/10 text-coral border border-white/5 shadow-inner">
+                  <Globe2 className="h-6 w-6" />
                 </span>
-
                 <div className="flex-1">
-                  <div className="flex justify-between items-start">
-                    <p className={`text-[10px] font-extrabold uppercase tracking-widest ${featured ? "text-coral" : "text-navy"}`}>
-                      {tag}
-                    </p>
-
-                    {/* Mobile Scale Indicator Bar */}
-                    <div className="flex items-end gap-[3px] h-3" aria-label={`Scope level ${level} of 4`}>
-                      {[1, 2, 3, 4].map((i) => (
-                        <div
-                          key={i}
-                          className={`w-[3px] rounded-sm ${i <= level ? (featured ? 'bg-coral' : 'bg-navy') : 'bg-navy/15'}`}
-                          style={{ height: `${40 + (i - 1) * 20}%` }}
-                        />
-                      ))}
-                    </div>
-                  </div>
-
-                  <h3 className="mt-1 text-base font-extrabold text-navy">{t}</h3>
-                  <p className="mt-1.5 text-sm text-text-mid leading-relaxed">{d}</p>
+                   <div className="inline-block bg-white/10 backdrop-blur px-3 py-1 rounded-full mb-2 border border-white/5">
+                     <p className="text-[10px] font-extrabold uppercase tracking-widest text-coral-light">Global Network</p>
+                   </div>
+                   <h3 className="text-xl md:text-2xl font-extrabold text-white">The Mission to Seafarers</h3>
+                   <p className="mt-1.5 text-sm md:text-base text-white/70 max-w-2xl leading-relaxed">Connected globally across more than 200 ports.</p>
                 </div>
               </div>
-            ))}
+
+              {/* Drill-down indicator */}
+              <div className="w-full flex justify-center -mb-3 mt-4 relative z-10">
+                <div className="grid h-8 w-8 place-items-center rounded-full bg-navy-dark border-[3px] border-navy shadow-sm">
+                  <ChevronDown className="h-4 w-4 text-white/50" />
+                </div>
+              </div>
+
+              {/* Layer 3: National */}
+              <div className="rounded-[1.75rem] sm:rounded-[2rem] bg-navy p-3 sm:p-5 md:p-8 shadow-inner border border-white/5 transition-all relative overflow-hidden">
+                {/* Subtle bg glow */}
+                <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full blur-3xl -mr-20 -mt-20 pointer-events-none" />
+
+                <div className="relative flex flex-col sm:flex-row items-start gap-4 sm:gap-6 mb-2 px-2 sm:px-2">
+                  <span className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-white/10 text-coral-light border border-white/5">
+                    <Building2 className="h-6 w-6" />
+                  </span>
+                  <div className="flex-1">
+                     <div className="inline-block bg-white/10 backdrop-blur px-3 py-1 rounded-full mb-2 border border-white/5">
+                       <p className="text-[10px] font-extrabold uppercase tracking-widest text-coral-light">National Body</p>
+                     </div>
+                     <h3 className="text-xl md:text-2xl font-extrabold text-white">MtS Canada</h3>
+                     <p className="mt-1.5 text-sm md:text-base text-white/80 max-w-3xl leading-relaxed">Mission to Seafarers Canada provides the national leadership, fund development, partnerships, and support that strengthen stations across the country.</p>
+                  </div>
+                </div>
+
+                {/* Drill-down indicator */}
+                <div className="w-full flex justify-center -mb-3 mt-4 relative z-10">
+                  <div className="grid h-8 w-8 place-items-center rounded-full bg-navy border-[3px] border-white shadow-sm">
+                    <ChevronDown className="h-4 w-4 text-white/70" />
+                  </div>
+                </div>
+
+                {/* Layer 2: Regional */}
+                <div className="rounded-[1.5rem] sm:rounded-[1.75rem] bg-white p-3 sm:p-5 md:p-8 shadow-2xl text-navy transition-all border border-border">
+                  <div className="flex flex-col sm:flex-row items-start gap-4 sm:gap-6 mb-2 px-2 sm:px-2">
+                    <span className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-warm-gray text-navy shadow-inner border border-navy/5">
+                      <Anchor className="h-6 w-6" />
+                    </span>
+                    <div className="flex-1">
+                       <div className="inline-block bg-navy/5 px-3 py-1 rounded-full mb-2 border border-navy/10">
+                         <p className="text-[10px] font-extrabold uppercase tracking-widest text-coral">Regional Hub</p>
+                       </div>
+                       <h3 className="text-xl md:text-2xl font-extrabold">MtS Southern Ontario</h3>
+                       <p className="mt-1.5 text-sm md:text-base text-text-mid max-w-3xl leading-relaxed">Within Ontario, Mission to Seafarers Southern Ontario leads work across regional ports including Toronto, Hamilton, and Oshawa.</p>
+                    </div>
+                  </div>
+
+                  {/* Drill-down indicator */}
+                  <div className="w-full flex justify-center -mb-3 mt-4 relative z-10">
+                    <div className="grid h-8 w-8 place-items-center rounded-full bg-white border-[3px] border-coral-light shadow-sm">
+                      <ChevronDown className="h-4 w-4 text-coral" />
+                    </div>
+                  </div>
+
+                  {/* Layer 1: Local (The Core) */}
+                  <div className="rounded-2xl sm:rounded-[1.5rem] bg-gradient-coral p-5 sm:p-7 md:p-10 shadow-[0_10px_40px_-10px_rgba(240,90,74,0.5)] text-white relative overflow-hidden group transition-all">
+                    {/* Animated "heart" pulse effect */}
+                    <div className="absolute top-1/2 left-1/2 w-full aspect-square bg-white/20 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2 pointer-events-none animate-pulse-slow" />
+                    
+                    <div className="relative flex flex-col sm:flex-row items-start gap-4 sm:gap-6">
+                      <span className="grid h-14 w-14 shrink-0 place-items-center rounded-full bg-white text-coral shadow-lg">
+                        <HomeIcon className="h-7 w-7" />
+                      </span>
+                      <div className="flex-1">
+                         <div className="inline-block bg-white/20 backdrop-blur px-3 py-1 rounded-full mb-2 border border-white/20 shadow-sm">
+                           <p className="text-[10px] font-extrabold uppercase tracking-widest text-white">Local Base</p>
+                         </div>
+                         <h3 className="text-2xl md:text-3xl font-extrabold text-white">Toronto Station</h3>
+                         <p className="mt-3 text-sm md:text-base text-white/95 max-w-3xl leading-relaxed font-medium">At the Port of Toronto, that work becomes direct. Here, we offer seafarers a welcoming place where they can rest, connect with loved ones, access practical help, receive a haircut, and know that they are not alone.</p>
+                      </div>
+                    </div>
+                  </div>
+                  
+                </div>
+              </div>
+            </div>
           </div>
 
           <div className="mt-12 text-center max-w-2xl mx-auto">
@@ -550,7 +546,7 @@ const Index = () => {
               </div>
               <div className="relative mt-auto">
                 <Button asChild size="lg" className="w-full bg-coral hover:bg-coral-light text-white font-bold shadow-warm h-12 px-2 text-sm sm:text-base">
-                  <Link to="/get-involved#donate">Donate Through Mission to Seafarers Canada <ArrowRight className="ml-2 h-4 w-4" /></Link>
+                  <Link to="/get-involved#donate">Donate Now <ArrowRight className="ml-2 h-4 w-4" /></Link>
                 </Button>
               </div>
             </div>

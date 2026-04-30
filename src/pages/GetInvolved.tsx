@@ -1,7 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { PageHero } from "@/components/PageHero";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
@@ -9,6 +8,9 @@ import { toast } from "@/hooks/use-toast";
 import {
   Heart, Package, Briefcase, Users, DollarSign, HandHeart, CheckCircle2, X, Gift
 } from "lucide-react";
+
+// Image import for the Hero Background
+import getInvolvedBg from "@/assets/GetInvoled.avif";
 
 // ==========================================
 // FORM COMPONENTS
@@ -271,12 +273,31 @@ const GetInvolved = () => {
 
   return (
     <>
-      {/* Hero Section */}
-      <PageHero
-        eyebrow="Get Involved"
-        title="Get Involved with Mission to Seafarers Toronto"
-        description="There are many ways to support and help create a welcoming place for seafarers arriving at the Port of Toronto. Whether you choose to volunteer, donate, provide in-kind support, or partner with us, your support helps ensure that seafarers feel cared for."
-      />
+      {/* ─────────── NEW HERO SECTION WITH BACKGROUND IMAGE ─────────── */}
+      <section className="relative pt-28 pb-20 md:pt-36 md:pb-28 overflow-hidden bg-navy min-h-[45vh] flex items-center justify-center">
+        {/* Background Image & Overlays */}
+        <div className="absolute inset-0 z-0">
+          <img 
+            src={getInvolvedBg} 
+            alt="Get Involved Background" 
+            className="w-full h-full object-cover object-center opacity-40 mix-blend-overlay" 
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-navy-dark via-navy/60 to-transparent" />
+        </div>
+        
+        {/* Hero Content */}
+        <div className="container-page relative z-10 text-center max-w-4xl mx-auto">
+          <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-coral/20 text-coral-light text-xs font-extrabold uppercase tracking-widest mb-6 border border-coral/30">
+            Get Involved
+          </span>
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-6">
+            Get Involved with Mission to Seafarers Toronto
+          </h1>
+          <p className="text-lg md:text-xl text-white/80 leading-relaxed font-medium">
+            There are many ways to support and help create a welcoming place for seafarers arriving at the Port of Toronto. Whether you choose to volunteer, donate, provide in-kind support, or partner with us, your support helps ensure that seafarers feel cared for.
+          </p>
+        </div>
+      </section>
 
       {/* Financial Donations Section */}
       <section id="donate" className="py-20 md:py-28 bg-white overflow-hidden">
@@ -415,7 +436,7 @@ const GetInvolved = () => {
               </Button>
               {/* External Wishlist Link */}
               <Button asChild variant="outline" className="border-coral text-coral hover:bg-coral hover:text-white">
-                <a href="https://www.amazon.ca/hz/wishlist/ls/PLACEHOLDER" target="_blank" rel="noopener noreferrer">Order from our wishlist</a>
+                <a href="https://www.amazon.ca/hz/wishlist/ls/3C9KTQNHTZ0NM?ref_=wl_fv_le." target="_blank" rel="noopener noreferrer">Order from our wishlist</a>
               </Button>
             </div>
           </div>
@@ -458,7 +479,7 @@ const GetInvolved = () => {
             </Button>
 
             <Button size="lg" variant="outline" asChild className="w-full sm:w-auto border-2 border-white text-white hover:bg-white hover:text-navy bg-transparent font-bold h-14 px-6">
-              <a href="https://www.amazon.ca/hz/wishlist/ls/PLACEHOLDER" target="_blank" rel="noopener noreferrer">Order from our wishlist</a>
+              <a href="https://www.amazon.ca/hz/wishlist/ls/3C9KTQNHTZ0NM?ref_=wl_fv_le." target="_blank" rel="noopener noreferrer">Order from our wishlist</a>
             </Button>
           </div>
         </div>
