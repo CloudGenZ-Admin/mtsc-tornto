@@ -214,7 +214,7 @@ const Index = () => {
                 title: "Seafarers Parcel Pickup Service",
                 body: "Order essentials online and have them delivered securely to our station for pickup when you dock.",
                 cta: "Go to parcel platform",
-                to: "YOUR_PARCEL_PLATFORM_URL_HERE", // REPLACE WITH REAL PLATFORM URL
+                to: "https://parcel.mtsc.ca/", // REPLACE WITH REAL PLATFORM URL
                 isExternal: true // Added logic for external link routing
               },
             ].map(({ i: Icon, tag, title, body, cta, to, isExternal, featured }) => (
