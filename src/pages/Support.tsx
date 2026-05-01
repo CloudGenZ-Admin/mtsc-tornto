@@ -6,6 +6,12 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/hooks/use-toast";
 import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import {
   Ship, Wifi, Coffee, Heart, Scissors, MapPin, HeartHandshake,
   MessageCircle, Sparkles, Calendar, Package, Phone, Clock, Globe, Users, X, Smartphone, ExternalLink
 } from "lucide-react";
@@ -22,60 +28,6 @@ import googlePlayBtn from "@/assets/btnapp-google-play.png.webp";
 // ==========================================
 // FORM COMPONENTS
 // ==========================================
-
-const HaircutForm = ({ onClose }: { onClose: () => void }) => {
-  const [form, setForm] = useState({ name: "", ship: "", expectedDate: "", contact: "", notes: "" });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-
-    const formData = new FormData();
-    formData.append("entry.5884385", form.name);
-    formData.append("entry.1886612943", form.ship);
-    if (form.expectedDate) formData.append("entry.1646593543", form.expectedDate);
-    formData.append("entry.183458349", form.contact);
-
-    try {
-      await fetch("https://docs.google.com/forms/d/e/1FAIpQLSewwuc8P89gcR7DuOzqEpQIKCNYFzk5wEXHG2TD8_0pBHpozA/formResponse", {
-        method: "POST",
-        mode: "no-cors",
-        body: formData
-      });
-      toast({ title: "Haircut Request received", description: "Our team will contact you to confirm." });
-      setForm({ name: "", ship: "", expectedDate: "", contact: "", notes: "" });
-      onClose();
-    } catch (error) {
-      toast({ title: "Error", description: "Failed to submit request. Please try again.", variant: "destructive" });
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
-  return (
-    <form onSubmit={handleSubmit} className="rounded-2xl bg-warm-gray p-6 md:p-8 shadow-card space-y-5 animate-in fade-in slide-in-from-bottom-4 relative">
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <Scissors className="h-6 w-6 text-coral" />
-          <h3 className="text-xl font-extrabold text-navy">Book a Haircut</h3>
-        </div>
-        <button type="button" onClick={onClose} className="text-gray-400 hover:text-coral transition-colors" aria-label="Close form">
-          <X className="h-6 w-6" />
-        </button>
-      </div>
-      <div className="grid sm:grid-cols-2 gap-4">
-        <div><Label>Name *</Label><Input required value={form.name} onChange={e => setForm({ ...form, name: e.target.value })} className="mt-1.5 bg-white" /></div>
-        <div><Label>Ship Name *</Label><Input required value={form.ship} onChange={e => setForm({ ...form, ship: e.target.value })} className="mt-1.5 bg-white" /></div>
-        <div><Label>Expected Date in Port</Label><Input type="date" value={form.expectedDate} onChange={e => setForm({ ...form, expectedDate: e.target.value })} className="mt-1.5 bg-white" /></div>
-        <div><Label>WhatsApp or Email *</Label><Input required value={form.contact} onChange={e => setForm({ ...form, contact: e.target.value })} className="mt-1.5 bg-white" /></div>
-      </div>
-      <Button type="submit" size="lg" disabled={isSubmitting} className="w-full bg-coral hover:bg-coral-light text-white font-bold h-12">
-        {isSubmitting ? "Submitting..." : "Submit Booking"}
-      </Button>
-    </form>
-  );
-};
 
 const VisitForm = ({ onClose }: { onClose: () => void }) => {
   const [form, setForm] = useState({ name: "", ship: "", contact: "", location: "" });
@@ -260,10 +212,12 @@ const GeneralSupportForm = ({ onClose }: { onClose: () => void }) => {
 
 const Support = () => {
   const [activeForm, setActiveForm] = useState<string | null>(null);
+  const [isHaircutOpen, setIsHaircutOpen] = useState(false);
   const formContainerRef = useRef<HTMLDivElement>(null);
 
   const quickAccessCards = [
-    { id: 'haircut', icon: Scissors, title: "Book a Haircut", desc: "Simple booking form" },
+    { id: 'haircut', icon: Scissors, title: "Book a Haircut", desc: "Book via Zeffy" },
+    { id: 'barber', icon: MessageCircle, title: "Chat with Barber", desc: "Message on WhatsApp" },
     { id: 'parcel', icon: Package, title: "Send or Receive a Parcel", desc: "Direct to Parcel Portal" },
     { id: 'visit', icon: Ship, title: "Request a Ship Visit", desc: "Schedule a visit" },
     { id: 'chaplain', icon: MessageCircle, title: "Message the Chaplain", desc: "Private message/support via Form or WhatsApp" }, 
@@ -274,7 +228,6 @@ const Support = () => {
 
   const renderActiveForm = () => {
     switch (activeForm) {
-      case 'haircut': return <HaircutForm onClose={handleCloseForm} />;
       case 'visit': return <VisitForm onClose={handleCloseForm} />;
       case 'chaplain': return <ChaplainForm onClose={handleCloseForm} />;
       case 'support': return <GeneralSupportForm onClose={handleCloseForm} />;
@@ -321,13 +274,46 @@ const Support = () => {
           </div>
 
           {/* ON-PAGE CARDS */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-12">
             {quickAccessCards.map((card) => {
               if (card.id === 'parcel') {
                 return (
                   <a
                     key={card.id}
                     href="https://parcel.mtsc.ca"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="p-6 rounded-2xl border text-left transition-all hover:shadow-card hover:-translate-y-1 flex flex-col items-start border-border bg-white cursor-pointer group"
+                  >
+                    <div className="flex w-full items-start justify-between">
+                      <card.icon className="h-10 w-10 mb-4 text-navy" />
+                      <ExternalLink className="h-5 w-5 text-text-mid opacity-50 group-hover:opacity-100 transition-opacity" />
+                    </div>
+                    <h3 className="font-bold text-navy text-lg mb-2">{card.title}</h3>
+                    <p className="text-sm text-text-mid font-medium">{card.desc}</p>
+                  </a>
+                );
+              }
+
+              if (card.id === 'haircut') {
+                return (
+                  <button
+                    key={card.id}
+                    onClick={() => setIsHaircutOpen(true)}
+                    className="p-6 rounded-2xl border text-left transition-all hover:shadow-card hover:-translate-y-1 flex flex-col items-start border-border bg-white cursor-pointer"
+                  >
+                    <card.icon className="h-10 w-10 mb-4 text-navy" />
+                    <h3 className="font-bold text-navy text-lg mb-2">{card.title}</h3>
+                    <p className="text-sm text-text-mid font-medium">{card.desc}</p>
+                  </button>
+                );
+              }
+
+              if (card.id === 'barber') {
+                return (
+                  <a
+                    key={card.id}
+                    href="https://wa.me/14272588449"
                     target="_blank"
                     rel="noreferrer"
                     className="p-6 rounded-2xl border text-left transition-all hover:shadow-card hover:-translate-y-1 flex flex-col items-start border-border bg-white cursor-pointer group"
@@ -576,6 +562,28 @@ const Support = () => {
           </div>
         </div>
       </section>
+
+      {/* ─────────── MODAL: HAIRCUT BOOKING ─────────── */}
+      <Dialog open={isHaircutOpen} onOpenChange={setIsHaircutOpen}>
+        <DialogContent className="max-w-5xl h-[95vh] p-0 overflow-hidden flex flex-col">
+          <DialogHeader className="p-4 pb-3 shrink-0 border-b">
+            <DialogTitle className="flex items-center gap-3 text-xl font-extrabold text-navy">
+              <Scissors className="h-5 w-5 text-coral" />
+              Book a Haircut Appointment
+            </DialogTitle>
+          </DialogHeader>
+          <div className="flex-1 overflow-hidden p-2">
+            <div className="w-full h-full bg-white rounded-lg border border-border overflow-hidden">
+              <iframe
+                src="https://www.zeffy.com/en-CA/ticketing/toronto-haircut-service"
+                title="Toronto Haircut Service Booking"
+                className="w-full h-full border-none block bg-transparent"
+                allow="payment"
+              ></iframe>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
     </>
   );
 };

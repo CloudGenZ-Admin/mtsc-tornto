@@ -9,7 +9,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 
-import logo from "@/assets/WhatsApp Image 2026-04-27 at 9.32.12 AM.jpeg";
+import logo from "@/assets/logo.jpeg";
 
 const nav = [
   { to: "/", label: "Home" },

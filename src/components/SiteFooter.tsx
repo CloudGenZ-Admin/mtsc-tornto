@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Mail, Phone, MapPin } from "lucide-react";
 
-import logo from "@/assets/WhatsApp Image 2026-04-27 at 9.32.12 AM.jpeg";
+import logo from "@/assets/logo.jpeg";
 
 export const SiteFooter = () => {
   // Function to instantly scroll to the top when a link is clicked
