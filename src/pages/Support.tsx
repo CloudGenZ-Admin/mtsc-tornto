@@ -7,12 +7,12 @@ import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/hooks/use-toast";
 import {
   Ship, Wifi, Coffee, Heart, Scissors, MapPin, HeartHandshake,
-  MessageCircle, Sparkles, Calendar, Package, Phone, Clock, Globe, Users, X
+  MessageCircle, Sparkles, Calendar, Package, Phone, Clock, Globe, Users, X, Smartphone, ExternalLink
 } from "lucide-react";
 
 import lounge from "@/assets/Algoma-Bear-Visit-21.avif";
 import judithImg from "@/assets/Toronto Station Chaplin And manager-Rev.Judith Alltree.png";
-import heroBg from "@/assets/SeasurferSupport.avif"; // Added new background image import
+import heroBg from "@/assets/SeasurferSupport.avif"; 
 
 // ==========================================
 // FORM COMPONENTS
@@ -80,47 +80,6 @@ const VisitForm = ({ onClose }: { onClose: () => void }) => {
   );
 };
 
-const ParcelForm = ({ onClose }: { onClose: () => void }) => {
-  const [form, setForm] = useState({ name: "", ship: "", contact: "", details: "" });
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    toast({ title: "Parcel Request received", description: "We will keep an eye out for your package." });
-    setForm({ name: "", ship: "", contact: "", details: "" });
-  };
-
-  return (
-    <form onSubmit={handleSubmit} className="rounded-2xl bg-warm-gray p-6 md:p-8 shadow-card space-y-5 animate-in fade-in slide-in-from-bottom-4 relative">
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <Package className="h-6 w-6 text-coral" />
-          <h3 className="text-xl font-extrabold text-navy">Send or Receive a Parcel</h3>
-        </div>
-        <button type="button" onClick={onClose} className="text-gray-400 hover:text-coral transition-colors" aria-label="Close form">
-          <X className="h-6 w-6" />
-        </button>
-      </div>
-      <div className="p-4 bg-white border border-border rounded-xl text-sm text-text-mid mb-2">
-        <strong className="text-navy block mb-1">Instructions:</strong>
-        Address your parcel to: <strong>Your Name, M/V [Ship Name], 8 Unwin Avenue, Toronto, ON M5A 3L1</strong>. Fill out this form to let us know it's coming.
-      </div>
-      <div className="grid sm:grid-cols-2 gap-4">
-        <div><Label>Name *</Label><Input required value={form.name} onChange={e => setForm({ ...form, name: e.target.value })} className="mt-1.5 bg-white" /></div>
-        <div><Label>Ship Name *</Label><Input required value={form.ship} onChange={e => setForm({ ...form, ship: e.target.value })} className="mt-1.5 bg-white" /></div>
-        <div><Label>WhatsApp or Email *</Label><Input required value={form.contact} onChange={e => setForm({ ...form, contact: e.target.value })} className="mt-1.5 bg-white" /></div>
-        <div><Label>Tracking Number / Details</Label><Input value={form.details} onChange={e => setForm({ ...form, details: e.target.value })} className="mt-1.5 bg-white" /></div>
-      </div>
-      <Button type="submit" size="lg" className="w-full bg-coral hover:bg-coral-light text-white font-bold h-12">Submit Parcel Details</Button>
-      <div className="text-center mt-2">
-        <a href="https://parcel.mtsc.ca" target="_blank" rel="noreferrer" className="text-coral font-bold hover:underline text-sm">
-          Or visit our dedicated Parcel Portal
-        </a>
-      </div>
-    </form>
-  );
-};
-
-// UPDATED: Added direct WhatsApp button below the form.
 const ChaplainForm = ({ onClose }: { onClose: () => void }) => {
   const [form, setForm] = useState({ name: "", contact: "", message: "" });
 
@@ -212,23 +171,17 @@ const Support = () => {
 
   const quickAccessCards = [
     { id: 'haircut', icon: Scissors, title: "Book a Haircut", desc: "Simple booking form" },
-    { id: 'parcel', icon: Package, title: "Send or Receive a Parcel", desc: "Instructions + request form" },
+    { id: 'parcel', icon: Package, title: "Send or Receive a Parcel", desc: "Direct to Parcel Portal" },
     { id: 'visit', icon: Ship, title: "Request a Ship Visit", desc: "Schedule a visit" },
-    { id: 'chaplain', icon: MessageCircle, title: "Message the Chaplain", desc: "Private message/support via Form or WhatsApp" }, // Updated desc
+    { id: 'chaplain', icon: MessageCircle, title: "Message the Chaplain", desc: "Private message/support via Form or WhatsApp" }, 
     { id: 'support', icon: Heart, title: "Request Support", desc: "General help (mental, practical, urgent)" }
   ];
 
   const handleCloseForm = () => setActiveForm(null);
 
-  const scrollToSection = (id: string) => {
-    setActiveForm(id);
-    document.getElementById("quick-access")?.scrollIntoView({ behavior: "smooth" });
-  };
-
   const renderActiveForm = () => {
     switch (activeForm) {
       case 'haircut': return <HaircutForm onClose={handleCloseForm} />;
-      case 'parcel': return <ParcelForm onClose={handleCloseForm} />;
       case 'visit': return <VisitForm onClose={handleCloseForm} />;
       case 'chaplain': return <ChaplainForm onClose={handleCloseForm} />;
       case 'support': return <GeneralSupportForm onClose={handleCloseForm} />;
@@ -238,9 +191,6 @@ const Support = () => {
 
   return (
     <>
-      {/* 1. Hero Section - UPDATED TO LIGHT UI WITH BACKGROUND IMAGE */}
-
-
       {/* 1. Hero Section - UPDATED TO NAVY UI */}
       <section className="relative pt-28 pb-20 md:pt-36 md:pb-28 overflow-hidden bg-navy min-h-[45vh] flex items-center justify-center border-b border-navy-dark">
         {/* Background Image & Overlays */}
@@ -279,24 +229,45 @@ const Support = () => {
 
           {/* ON-PAGE CARDS */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-12">
-            {quickAccessCards.map((card) => (
-              <button
-                key={card.id}
-                onClick={() => {
-                  setActiveForm(card.id);
-                  // Add a small timeout to ensure the form is rendered before scrolling
-                  setTimeout(() => {
-                    formContainerRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
-                  }, 100);
-                }}
-                className={`p-6 rounded-2xl border text-left transition-all hover:shadow-card hover:-translate-y-1 flex flex-col items-start ${activeForm === card.id ? "border-coral bg-coral-pale ring-1 ring-coral" : "border-border bg-white"
-                  }`}
-              >
-                <card.icon className={`h-10 w-10 mb-4 ${activeForm === card.id ? "text-coral" : "text-navy"}`} />
-                <h3 className="font-bold text-navy text-lg mb-2">{card.title}</h3>
-                <p className="text-sm text-text-mid font-medium">{card.desc}</p>
-              </button>
-            ))}
+            {quickAccessCards.map((card) => {
+              if (card.id === 'parcel') {
+                return (
+                  <a
+                    key={card.id}
+                    href="https://parcel.mtsc.ca"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="p-6 rounded-2xl border text-left transition-all hover:shadow-card hover:-translate-y-1 flex flex-col items-start border-border bg-white cursor-pointer group"
+                  >
+                    <div className="flex w-full items-start justify-between">
+                      <card.icon className="h-10 w-10 mb-4 text-navy" />
+                      <ExternalLink className="h-5 w-5 text-text-mid opacity-50 group-hover:opacity-100 transition-opacity" />
+                    </div>
+                    <h3 className="font-bold text-navy text-lg mb-2">{card.title}</h3>
+                    <p className="text-sm text-text-mid font-medium">{card.desc}</p>
+                  </a>
+                );
+              }
+              
+              return (
+                <button
+                  key={card.id}
+                  onClick={() => {
+                    setActiveForm(card.id);
+                    // Add a small timeout to ensure the form is rendered before scrolling
+                    setTimeout(() => {
+                      formContainerRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+                    }, 100);
+                  }}
+                  className={`p-6 rounded-2xl border text-left transition-all hover:shadow-card hover:-translate-y-1 flex flex-col items-start ${activeForm === card.id ? "border-coral bg-coral-pale ring-1 ring-coral" : "border-border bg-white"
+                    }`}
+                >
+                  <card.icon className={`h-10 w-10 mb-4 ${activeForm === card.id ? "text-coral" : "text-navy"}`} />
+                  <h3 className="font-bold text-navy text-lg mb-2">{card.title}</h3>
+                  <p className="text-sm text-text-mid font-medium">{card.desc}</p>
+                </button>
+              );
+            })}
           </div>
 
           {/* Attached Ref to the container rendering the active form */}
@@ -368,10 +339,11 @@ const Support = () => {
       </section>
 
       {/* 5. Contact / Emergency Support */}
-      <section className="py-16 bg-navy text-white">
+      <section className="py-20 bg-navy text-white">
         <div className="container-page text-center">
           <h2 className="text-3xl text-white md:text-4xl font-extrabold mb-10">Need Immediate Help?</h2>
-          <div className="flex flex-col sm:flex-row justify-center items-center gap-4 md:gap-6">
+          
+          <div className="flex flex-col sm:flex-row justify-center items-center gap-4 md:gap-6 mb-16">
             <a href="tel:+16472953219" className="flex items-center justify-center gap-3 bg-white/10 hover:bg-white/20 px-8 py-4 rounded-full transition-colors font-bold text-lg w-full sm:w-auto">
               <Phone className="h-6 w-6" /> Phone: +1 647-295-3219
             </a>
@@ -381,6 +353,42 @@ const Support = () => {
             <a href="mailto:glutenfreepriest@gmail.com" className="flex items-center justify-center gap-3 bg-white/10 hover:bg-white/20 px-8 py-4 rounded-full transition-colors font-bold text-lg w-full sm:w-auto">
               Email: glutenfreepriest@gmail.com
             </a>
+          </div>
+
+          {/* Need Help / National & App Section */}
+          <div className="bg-white/5 border border-white/10 rounded-3xl p-8 md:p-12 text-left max-w-4xl mx-auto shadow-lg relative overflow-hidden">
+            <div className="absolute top-0 right-0 p-8 opacity-10 pointer-events-none">
+              <HeartHandshake className="w-48 h-48" />
+            </div>
+            
+            <h3 className="text-2xl md:text-3xl font-extrabold mb-8 text-white relative z-10">Need Help?</h3>
+            <ul className="space-y-6 text-lg font-medium text-white/90 relative z-10 mb-10">
+              <li className="flex items-start gap-4">
+                <MapPin className="h-7 w-7 text-coral shrink-0" />
+                <a href="https://mtsc.ca/contact/#find-station" target="_blank" rel="noreferrer" className="hover:text-coral transition-colors underline underline-offset-4 decoration-white/30">
+                  Find a Mission to Seafarers station at a Canadian port
+                </a>
+              </li>
+              <li className="flex items-start gap-4">
+                <HeartHandshake className="h-7 w-7 text-coral shrink-0" />
+                <span>
+                  Get help and support on a welfare or justice issue: <a href="mailto:crewhelp@mtsmail.org" className="font-bold text-white hover:text-coral transition-colors underline underline-offset-4 decoration-white/30">crewhelp@mtsmail.org</a>
+                </span>
+              </li>
+              <li className="flex items-start gap-4">
+                <Smartphone className="h-7 w-7 text-coral shrink-0" />
+                <span>Connect instantly with a chaplain via our 24hr chat service (Happy at Sea app)</span>
+              </li>
+            </ul>
+
+            <div className="flex flex-col sm:flex-row gap-4 relative z-10">
+              <a href="https://apps.apple.com/app/happy-at-sea/id1504998725" target="_blank" rel="noreferrer" className="flex items-center justify-center gap-3 bg-white hover:bg-warm-gray text-navy px-6 py-4 rounded-xl transition-colors font-bold w-full sm:w-auto shadow-sm">
+                Download the Happy at Sea App on the App Store
+              </a>
+              <a href="https://play.google.com/store/apps/details?id=org.missiontoseafarers.app&hl=en_IN" target="_blank" rel="noreferrer" className="flex items-center justify-center gap-3 bg-white hover:bg-warm-gray text-navy px-6 py-4 rounded-xl transition-colors font-bold w-full sm:w-auto shadow-sm">
+                Get the Happy at Sea App on Google Play
+              </a>
+            </div>
           </div>
         </div>
       </section>
@@ -395,6 +403,7 @@ const Support = () => {
                 <MapPin className="h-8 w-8 text-coral shrink-0" />
                 <div>
                   <strong className="block text-navy text-lg mb-1">Address:</strong>
+                  <span className="text-text-mid font-medium block">Cruise Ship Terminal</span>
                   <span className="text-text-mid font-medium">8 Unwin Avenue, Toronto</span>
                 </div>
               </li>
@@ -441,7 +450,16 @@ const Support = () => {
                   />
                 </div>
                 <h3 className="text-2xl font-extrabold text-navy">Rev. Judith Alltree</h3>
-                <p className="text-coral font-bold mt-1 text-lg">Station Chaplain</p>
+                <p className="text-coral font-bold mt-1 text-lg mb-5">Station Chaplain</p>
+                
+                <a 
+                  href="https://wa.me/16472953219" 
+                  target="_blank" 
+                  rel="noreferrer" 
+                  className="inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#20b858] text-white px-6 py-3 rounded-full font-bold transition-colors shadow-sm"
+                >
+                  <MessageCircle className="h-5 w-5" /> Chat with Judith
+                </a>
               </div>
             </div>
 

@@ -1,6 +1,6 @@
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { useEffect, useState, useRef } from "react";
-import { Menu, X, ChevronDown } from "lucide-react";
+import { Menu, X, ChevronDown, Package } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 import logo from "@/assets/WhatsApp Image 2026-04-27 at 9.32.12 AM.jpeg";
@@ -10,7 +10,7 @@ const nav = [
   { to: "/about", label: "About" },
   { to: "/support", label: "Seafarer Support" },
   { to: "/get-involved", label: "Get Involved" },
-  // { to: "/contact", label: "Contact" },
+  { to: "/contact", label: "Contact" }, 
 ];
 
 export const SiteHeader = () => {
@@ -59,29 +59,35 @@ export const SiteHeader = () => {
         scrolled ? "bg-white/95 backdrop-blur-md shadow-soft" : "bg-white/80 backdrop-blur"
       }`}
     >
-      <div className="container-page flex h-16 items-center justify-between md:h-20">
-        {/* Logo */}
-        <Link to="/" className="flex items-center gap-2.5 group">
+      {/* 
+        UPDATED CONTAINER: 
+        Replaced `container-page` with a custom wide container (`max-w-[1600px]`) 
+        to ensure all buttons and nav items have enough room to sit on one line.
+      */}
+      <div className="w-full max-w-[1600px] mx-auto px-4 md:px-6 lg:px-8 flex h-20 items-center justify-between md:h-24 lg:h-28 gap-4">
+        
+        {/* Logo - Ensures text doesn't wrap using whitespace-nowrap */}
+        <Link to="/" className="flex items-center gap-2 lg:gap-3 group shrink-0">
           <img 
             src={logo} 
             alt="Mission to Seafarers Logo" 
-            className="h-10 md:h-12 w-auto shrink-0 object-contain rounded-md group-hover:scale-105 transition-transform" 
+            className="h-14 md:h-16 lg:h-[4.5rem] w-auto shrink-0 object-contain rounded-md group-hover:scale-105 transition-transform" 
           />
-          <span className="flex flex-col leading-none">
-            <span className="text-[15px] font-extrabold text-navy">Mission to Seafarers</span>
-            <span className="text-[11px] font-bold uppercase tracking-[0.18em] text-coral">Toronto</span>
+          <span className="flex flex-col leading-none justify-center">
+            <span className="text-[16px] lg:text-[15px] xl:text-[18px] font-extrabold text-navy whitespace-nowrap">Mission to Seafarers</span>
+            <span className="text-[12px] lg:text-[11px] xl:text-[13px] font-bold uppercase tracking-[0.18em] text-coral mt-0.5 whitespace-nowrap">Toronto</span>
           </span>
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden lg:flex items-center gap-1">
+        <nav className="hidden lg:flex items-center gap-0.5 xl:gap-2">
           {nav.map((n) => (
             n.subItems ? (
               <div key={n.to} className="relative group">
                 <NavLink
                   to={n.to}
                   className={({ isActive }) =>
-                    `flex items-center gap-1 px-3 py-2 text-sm font-semibold rounded-md transition-colors ${
+                    `flex items-center gap-1 px-2 xl:px-3 py-2 text-[13px] xl:text-[15px] 2xl:text-base font-semibold whitespace-nowrap rounded-md transition-colors ${
                       isActive || location.pathname.includes(n.to) ? "text-coral" : "text-navy hover:text-coral"
                     }`
                   }
@@ -99,7 +105,7 @@ export const SiteHeader = () => {
                         to={sub.to}
                         end={sub.to === "/newsletter"}
                         className={({ isActive }) =>
-                          `block px-3 py-2 text-sm font-medium rounded-md transition-colors ${
+                          `block px-3 py-2 text-sm font-medium rounded-md transition-colors whitespace-normal ${
                             isActive ? "bg-coral-pale text-coral" : "text-text-mid hover:text-navy hover:bg-warm-gray"
                           }`
                         }
@@ -116,7 +122,7 @@ export const SiteHeader = () => {
                 to={n.to}
                 end={n.to === "/"}
                 className={({ isActive }) =>
-                  `px-3 py-2 text-sm font-semibold rounded-md transition-colors ${
+                  `px-2 xl:px-3 py-2 text-[13px] xl:text-[15px] 2xl:text-base font-semibold whitespace-nowrap rounded-md transition-colors ${
                     isActive ? "text-coral" : "text-navy hover:text-coral"
                   }`
                 }
@@ -128,9 +134,27 @@ export const SiteHeader = () => {
         </nav>
 
         {/* Desktop CTA Buttons */}
-        <div className="hidden lg:flex items-center gap-3">
-          <Button asChild size="sm" className="bg-coral hover:bg-coral-light text-white font-bold shadow-warm hover:shadow-warm-hover">
-            <Link to="/contact">Contact Us</Link>
+        <div className="hidden lg:flex items-center gap-2 xl:gap-3 shrink-0">
+          {/* Seafarer Parcel Pickup Service Button */}
+          <Button asChild variant="outline" size="sm" className="border-border bg-warm-gray text-navy hover:bg-navy hover:text-white font-bold whitespace-nowrap text-xs xl:text-sm px-3 xl:px-4">
+            <a href="https://parcel.mtsc.ca/" target="_blank" rel="noopener noreferrer" className="flex items-center">
+              <Package className="w-4 h-4 mr-1.5 hidden 2xl:block" />
+              {/* Expands to full text ONLY on massive screens (2xl), otherwise stays short to save line space */}
+              <span className="hidden 2xl:inline">Seafarer Parcel Pickup Service</span>
+              <span className="2xl:hidden">Parcel Pickup</span>
+            </a>
+          </Button>
+          
+          {/* Send a Prayer Button */}
+          <Button asChild variant="outline" size="sm" className="border-navy text-navy hover:bg-navy hover:text-white font-bold whitespace-nowrap text-xs xl:text-sm px-3 xl:px-4">
+            <a href="https://mtsc.ca/for-seafarers/prayer-wall/" target="_blank" rel="noopener noreferrer">
+              Send a Prayer
+            </a>
+          </Button>
+
+          {/* Large Orange Donate Button */}
+          <Button asChild size="lg" className="bg-coral hover:bg-coral-light text-white font-bold shadow-warm hover:shadow-warm-hover px-5 xl:px-6 text-sm xl:text-base whitespace-nowrap cursor-pointer">
+            <Link to="/get-involved#donate">Donate</Link>
           </Button>
         </div>
 
@@ -138,21 +162,20 @@ export const SiteHeader = () => {
         <button
           aria-label="Toggle menu"
           onClick={() => setOpen((v) => !v)}
-          className="lg:hidden p-2 rounded-md text-navy hover:bg-warm-gray"
+          className="lg:hidden p-2 rounded-md text-navy hover:bg-warm-gray shrink-0"
         >
-          {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          {open ? <X className="h-7 w-7" /> : <Menu className="h-7 w-7" />}
         </button>
       </div>
 
       {/* Mobile Navigation Drawer */}
       {open && (
         <div className="lg:hidden border-t border-border bg-white animate-in fade-in slide-in-from-top-4 duration-300 shadow-xl">
-          <div className="container-page py-4 flex flex-col gap-2 max-h-[80vh] overflow-y-auto">
+          <div className="container-page py-4 flex flex-col gap-2 max-h-[85vh] overflow-y-auto">
             {nav.map((n) => (
               <div key={n.to} className="flex flex-col">
                 {n.subItems ? (
                   <>
-                    {/* Mobile Accordion Toggle Button */}
                     <button
                       onClick={() => toggleMobileAccordion(n.label)}
                       className={`px-3 py-3 text-base font-semibold rounded-md flex items-center justify-between w-full text-left transition-colors ${
@@ -167,7 +190,6 @@ export const SiteHeader = () => {
                       />
                     </button>
                     
-                    {/* Mobile Smooth Expanding Dropdown */}
                     <div 
                       className={`overflow-hidden transition-all duration-300 ease-in-out ${
                         mobileExpanded === n.label ? "max-h-[400px] opacity-100 mt-1" : "max-h-0 opacity-0"
@@ -207,12 +229,21 @@ export const SiteHeader = () => {
               </div>
             ))}
 
+            {/* Mobile CTAs */}
             <div className="flex flex-col gap-3 pt-4 border-t border-border mt-2">
-              {/* <Button asChild variant="outline" className="border-2 border-navy text-navy font-bold w-full">
+              <Button asChild variant="outline" className="border-2 border-border bg-warm-gray text-navy font-bold w-full justify-start h-12">
+                <a href="https://parcel.mtsc.ca/" target="_blank" rel="noopener noreferrer">
+                  <Package className="w-5 h-5 mr-2" />
+                  Seafarer Parcel Pickup Service
+                </a>
+              </Button>
+              <Button asChild variant="outline" className="border-2 border-navy text-navy font-bold w-full justify-start h-12">
+                <a href="https://mtsc.ca/for-seafarers/prayer-wall/" target="_blank" rel="noopener noreferrer">
+                  Send a Prayer
+                </a>
+              </Button>
+              <Button asChild className="bg-coral hover:bg-coral-light text-white font-extrabold w-full text-lg h-14">
                 <Link to="/get-involved#donate">Donate</Link>
-              </Button> */}
-              <Button asChild className="bg-coral hover:bg-coral-light text-white font-bold w-full">
-                <Link to="/contact">Contact Us</Link>
               </Button>
             </div>
           </div>

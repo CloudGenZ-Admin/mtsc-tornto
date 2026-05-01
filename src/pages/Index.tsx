@@ -4,18 +4,18 @@ import { Button } from "@/components/ui/button";
 import {
   ArrowRight, Anchor, Wifi, Coffee, Heart, Scissors, Users, Globe2, HandHeart,
   Calendar, MapPin, Ship, Package, LifeBuoy, ShieldCheck, HeartHandshake, Building2, Home as HomeIcon, ChevronRight,
-  ChevronDown
+  ChevronDown, X
 } from "lucide-react";
 
 // Image imports for the Hero Section
 import heroImg from "@/assets/hero-port-toronto.jpg";
 import skyline from "@/assets/toronto-skyline.png";
 
-// New background image imports
+// Background image imports
 import waterImg from "@/assets/water1.jpg";
 import seaImg from "@/assets/sea1.jpg";
 
-// Image imports for the new Gallery Section
+// Image imports for Gallery & Events
 import eventImg1 from "@/assets/GlipmsOfevents.avif";
 import eventImg2 from "@/assets/GlipmsOfevents2.avif";
 import eventImg3 from "@/assets/GlipmsOfevents3.avif";
@@ -23,6 +23,7 @@ import eventImg4 from "@/assets/GettingSupport.avif";
 
 const Index = () => {
   const [showAllEvents, setShowAllEvents] = useState(false);
+  const [isDonateOpen, setIsDonateOpen] = useState(false); // Controls the new Donate Pop-up
 
   const allUpdates = [
     {
@@ -31,6 +32,7 @@ const Index = () => {
       date: "May 20, 2026",
       location: "Port of Toronto",
       overview: "Join us as we celebrate the grand reopening of the Mission to Seafarers Toronto station alongside International Women in Maritime Day. This special event marks a new chapter after years of closure and highlights the vital role of women across the maritime sector.",
+      image: eventImg1
     },
     {
       tag: "Event",
@@ -38,27 +40,31 @@ const Index = () => {
       date: "June 25, 2026",
       location: "Toronto City Hall",
       overview: "Join us for a special flag-raising ceremony at Toronto City Hall to honour and recognize the vital contributions of seafarers worldwide.",
+      image: eventImg2
     },
     {
       tag: "Station News",
       title: "Toronto Station Opening and Community Welcome",
       date: "Coming Soon",
       location: "Toronto Station",
-      overview: "We are thrilled to welcome the community to our new station space. Stay tuned for official dates and ways you can get involved locally."
+      overview: "We are thrilled to welcome the community to our new station space. Stay tuned for official dates and ways you can get involved locally.",
+      image: eventImg3
     },
     {
       tag: "Story",
       title: "Stories from the Port of Toronto",
       date: "Ongoing",
       location: "Port of Toronto",
-      overview: "Read firsthand accounts of the seafarers arriving at the Port of Toronto and the impact that a simple, welcoming presence can have after weeks at sea."
+      overview: "Read firsthand accounts of the seafarers arriving at the Port of Toronto and the impact that a simple, welcoming presence can have after weeks at sea.",
+      image: eventImg4
     },
     {
       tag: "Service",
       title: "New haircut service now available for visiting seafarers",
       date: "Now Available",
       location: "Toronto Station",
-      overview: "A small service that makes a meaningful difference after time at sea. We are now accepting advance bookings for haircut services upon arrival to ensure seafarers get the care they need."
+      overview: "A small service that makes a meaningful difference after time at sea. We are now accepting advance bookings for haircut services upon arrival to ensure seafarers get the care they need.",
+      image: eventImg1
     }
   ];
 
@@ -83,7 +89,21 @@ const Index = () => {
 
             {/* Left Column: Text Content */}
             <div className="lg:col-span-7 animate-fade-in-up">
-              <span className="eyebrow bg-white/50 backdrop-blur inline-block px-2 py-1 rounded-md">Mission to Seafarers · Toronto</span>
+              
+              <div className="relative inline-block mt-4 md:mt-0">
+                {/* Floating skyline accent moved next to brand title */}
+                <img
+                  src={skyline}
+                  alt="Toronto Skyline"
+                  aria-hidden="true"
+                  className="absolute bottom-[90%] -right-10 w-28 md:w-40 opacity-80 animate-float pointer-events-none z-0"
+                  loading="lazy"
+                />
+                <span className="eyebrow bg-white/50 backdrop-blur inline-block px-2 py-1 rounded-md relative z-10">
+                  Mission to Seafarers · Toronto
+                </span>
+              </div>
+
               <h1 className="mt-5 text-[2.25rem] sm:text-5xl lg:text-[3.75rem] font-extrabold leading-[1.05] text-navy tracking-tight drop-shadow-sm">
                 A Global Lifeline with a {" "}
                 <span className="relative inline-block text-coral whitespace-nowrap">
@@ -99,17 +119,18 @@ const Index = () => {
                 </strong>
                 At the Port of Toronto, seafarers arrive after time at sea, sometimes for days, weeks and even months. Mission to Seafarers Toronto is here during that window. With practical support. With a place to step off the vessel. With people to speak to while they are ashore. We are a part of Mission to Seafarers Southern Ontario and Mission to Seafarers Canada, connected to a wider network that meets seafarers in ports around world.
               </p>
-              <div className="mt-8 flex flex-wrap gap-4">
-                <Button asChild size="lg" className="bg-coral hover:bg-coral-light text-white font-bold shadow-warm hover:shadow-warm-hover h-12 px-7">
+              <div className="mt-8 flex flex-wrap gap-4 relative z-20">
+                <Button asChild size="lg" className="bg-coral hover:bg-coral-light text-white font-bold shadow-warm hover:shadow-warm-hover h-12 px-7 cursor-pointer">
                   <Link to="/contact">Contact the Station <ArrowRight className="ml-2 h-4 w-4" /></Link>
                 </Button>
-                <Button asChild variant="outline" size="lg" className="border-2 border-navy text-navy bg-white/50 backdrop-blur hover:bg-navy hover:text-white font-bold h-12 px-7">
-                  <Link to="/get-involved#donate">Donate</Link>
+                {/* Updated Donate button to trigger Modal */}
+                <Button onClick={() => setIsDonateOpen(true)} variant="outline" size="lg" className="border-2 border-navy text-navy bg-white/50 backdrop-blur hover:bg-navy hover:text-white font-bold h-12 px-7 cursor-pointer">
+                  Donate
                 </Button>
               </div>
             </div>
 
-            {/* Right Column: Layered Image + Skyline Accent */}
+            {/* Right Column: Image */}
             <div className="lg:col-span-5 relative animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
               <div className="relative rounded-2xl overflow-hidden shadow-soft aspect-[4/5] sm:aspect-[5/4] lg:aspect-[4/5]">
                 <img
@@ -128,15 +149,6 @@ const Index = () => {
                   </div>
                 </div>
               </div>
-
-              {/* Floating skyline accent (UPDATED to appear on TOP) */}
-              <img
-                src={skyline}
-                alt=""
-                aria-hidden="true"
-                className="hidden md:block absolute -top-10 -left-8 lg:-top-12 lg:-left-12 w-48 lg:w-64 opacity-90 animate-float pointer-events-none z-20"
-                loading="lazy"
-              />
 
               {/* Stat badge */}
               <div className="hidden sm:block absolute top-10 -right-4 lg:top-14 lg:-right-6 rounded-full bg-coral text-white px-5 py-4 shadow-warm rotate-[-6deg] z-10">
@@ -186,22 +198,23 @@ const Index = () => {
                 tag: "At the Station",
                 title: "Community Connection",
                 body: "Refreshments and a comfortable place to sit, pause, and reconnect with loved ones in a welcoming station space.",
-                cta: "See station services",
-                to: "/support",
+                cta: "Come visit us at the station", // Updated text
+                to: "/contact", // Updated route
+                isExternal: false
               },
-              
               {
                 i: Package,
                 tag: "Logistics",
                 title: "Seafarers Parcel Pickup Service",
                 body: "Order essentials online and have them delivered securely to our station for pickup when you dock.",
-                cta: "Learn about parcels",
-                to: "/support#parcels",
+                cta: "Go to parcel platform",
+                to: "YOUR_PARCEL_PLATFORM_URL_HERE", // REPLACE WITH REAL PLATFORM URL
+                isExternal: true // Added logic for external link routing
               },
-            ].map(({ i: Icon, tag, title, body, cta, to, featured }) => (
+            ].map(({ i: Icon, tag, title, body, cta, to, isExternal, featured }) => (
               <div
                 key={title}
-                className={`group rounded-2xl p-7 md:p-8 transition-all hover:-translate-y-1 ${featured
+                className={`group rounded-2xl p-7 md:p-8 transition-all hover:-translate-y-1 flex flex-col items-start ${featured
                     ? "bg-gradient-coral text-white shadow-warm hover:shadow-warm-hover"
                     : "bg-warm-gray hover:shadow-card-hover"
                   }`}
@@ -215,23 +228,36 @@ const Index = () => {
                 <h3 className={`mt-1.5 text-xl md:text-2xl font-extrabold leading-tight ${featured ? "!text-white" : "text-navy"}`}>
                   {title}
                 </h3>
-                <p className={`mt-3 text-sm leading-relaxed ${featured ? "text-white/90" : "text-text-mid"}`}>
+                <p className={`mt-3 text-sm leading-relaxed flex-1 ${featured ? "text-white/90" : "text-text-mid"}`}>
                   {body}
                 </p>
-                <Link
-                  to={to}
-                  className={`mt-6 inline-flex items-center gap-1.5 text-sm font-extrabold ${featured ? "text-white hover:gap-2.5" : "text-coral hover:gap-2.5"
-                    } transition-all`}
-                >
-                  {cta} <ChevronRight className="h-4 w-4" />
-                </Link>
+
+                {/* Switch between internal Link and external <a> depending on content */}
+                {isExternal ? (
+                  <a
+                    href={to}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`mt-6 inline-flex items-center gap-1.5 text-sm font-extrabold ${featured ? "text-white hover:gap-2.5" : "text-coral hover:gap-2.5"} transition-all`}
+                  >
+                    {cta} <ChevronRight className="h-4 w-4" />
+                  </a>
+                ) : (
+                  <Link
+                    to={to}
+                    className={`mt-6 inline-flex items-center gap-1.5 text-sm font-extrabold ${featured ? "text-white hover:gap-2.5" : "text-coral hover:gap-2.5"} transition-all`}
+                  >
+                    {cta} <ChevronRight className="h-4 w-4" />
+                  </Link>
+                )}
               </div>
             ))}
           </div>
 
           <div className="mt-8 rounded-3xl border border-border bg-warm-gray p-8 md:p-12 text-center">
+            {/* Updated Section Title */}
             <p className="text-sm font-bold uppercase tracking-widest text-navy mb-10">
-              Comprehensive Care & Support
+              How We Care for Seafarers
             </p>
 
             {/* ─── ALL SERVICES AS PILLARS (Large Circles) ─── */}
@@ -252,10 +278,7 @@ const Index = () => {
                   key={t}
                   className="flex flex-col items-center justify-center w-40 h-40 sm:w-44 sm:h-44 md:w-48 md:h-48 rounded-full bg-white shadow-xl transition-transform hover:-translate-y-1 p-3 sm:p-5"
                 >
-                  {/* Navy Icon */}
                   <Icon className="h-10 w-10 sm:h-12 sm:w-12 text-navy mb-2 sm:mb-3" strokeWidth={1.5} />
-
-                  {/* Coral/Orange Text */}
                   <span className="text-[12px] sm:text-[13px] md:text-sm font-extrabold text-coral leading-tight px-1 max-w-[85%]">
                     {t}
                   </span>
@@ -313,10 +336,8 @@ const Index = () => {
             </p>
           </div>
 
-          {/* Nested Vertical Hierarchy */}
           <div className="mt-14 max-w-5xl mx-auto">
-            
-            {/* Layer 4: Global */}
+            {/* Diagram content remains unchanged */}
             <div className="rounded-[2rem] sm:rounded-[2.5rem] bg-navy-dark p-3 sm:p-5 md:p-8 shadow-xl text-white transition-all border border-navy/50">
               <div className="flex flex-col sm:flex-row items-start gap-4 sm:gap-6 mb-2 px-2 sm:px-2">
                 <span className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-white/10 text-coral border border-white/5 shadow-inner">
@@ -331,16 +352,13 @@ const Index = () => {
                 </div>
               </div>
 
-              {/* Drill-down indicator */}
               <div className="w-full flex justify-center -mb-3 mt-4 relative z-10">
                 <div className="grid h-8 w-8 place-items-center rounded-full bg-navy-dark border-[3px] border-navy shadow-sm">
                   <ChevronDown className="h-4 w-4 text-white/50" />
                 </div>
               </div>
 
-              {/* Layer 3: National */}
               <div className="rounded-[1.75rem] sm:rounded-[2rem] bg-navy p-3 sm:p-5 md:p-8 shadow-inner border border-white/5 transition-all relative overflow-hidden">
-                {/* Subtle bg glow */}
                 <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full blur-3xl -mr-20 -mt-20 pointer-events-none" />
 
                 <div className="relative flex flex-col sm:flex-row items-start gap-4 sm:gap-6 mb-2 px-2 sm:px-2">
@@ -356,14 +374,12 @@ const Index = () => {
                   </div>
                 </div>
 
-                {/* Drill-down indicator */}
                 <div className="w-full flex justify-center -mb-3 mt-4 relative z-10">
                   <div className="grid h-8 w-8 place-items-center rounded-full bg-navy border-[3px] border-white shadow-sm">
                     <ChevronDown className="h-4 w-4 text-white/70" />
                   </div>
                 </div>
 
-                {/* Layer 2: Regional */}
                 <div className="rounded-[1.5rem] sm:rounded-[1.75rem] bg-white p-3 sm:p-5 md:p-8 shadow-2xl text-navy transition-all border border-border">
                   <div className="flex flex-col sm:flex-row items-start gap-4 sm:gap-6 mb-2 px-2 sm:px-2">
                     <span className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-warm-gray text-navy shadow-inner border border-navy/5">
@@ -378,16 +394,13 @@ const Index = () => {
                     </div>
                   </div>
 
-                  {/* Drill-down indicator */}
                   <div className="w-full flex justify-center -mb-3 mt-4 relative z-10">
                     <div className="grid h-8 w-8 place-items-center rounded-full bg-white border-[3px] border-coral-light shadow-sm">
                       <ChevronDown className="h-4 w-4 text-coral" />
                     </div>
                   </div>
 
-                  {/* Layer 1: Local (The Core) */}
                   <div className="rounded-2xl sm:rounded-[1.5rem] bg-gradient-coral p-5 sm:p-7 md:p-10 shadow-[0_10px_40px_-10px_rgba(240,90,74,0.5)] text-white relative overflow-hidden group transition-all">
-                    {/* Animated "heart" pulse effect */}
                     <div className="absolute top-1/2 left-1/2 w-full aspect-square bg-white/20 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2 pointer-events-none animate-pulse-slow" />
                     
                     <div className="relative flex flex-col sm:flex-row items-start gap-4 sm:gap-6">
@@ -403,7 +416,6 @@ const Index = () => {
                       </div>
                     </div>
                   </div>
-                  
                 </div>
               </div>
             </div>
@@ -428,7 +440,6 @@ const Index = () => {
               </h2>
             </div>
 
-            {/* Toggle Button for viewing all updates */}
             <Button
               variant="outline"
               onClick={() => setShowAllEvents(!showAllEvents)}
@@ -442,13 +453,24 @@ const Index = () => {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
             {displayedUpdates.map((n) => (
               <article key={n.title} className="group rounded-2xl border border-border bg-white overflow-hidden hover:shadow-card-hover hover:-translate-y-1 transition-all flex flex-col">
-                <div className="aspect-[32/10] bg-gradient-hero relative overflow-hidden shrink-0 flex items-end p-5">
-                  <div className="absolute inset-0 bg-gradient-to-br from-navy/30 via-navy-dark/60 to-navy-dark/90" />
-                  <div className="absolute top-4 left-4 inline-flex items-center gap-1.5 rounded-full bg-coral text-white text-[10px] font-extrabold uppercase tracking-widest px-3 py-1.5">
+                {/* Visual upgrade with images */}
+                <div className="aspect-[16/9] relative overflow-hidden shrink-0 flex items-end p-5">
+                  {n.image && (
+                    <img 
+                      src={n.image} 
+                      alt={n.title} 
+                      className="absolute inset-0 w-full h-full object-cover z-0 transition-transform duration-700 group-hover:scale-105" 
+                      loading="lazy" 
+                    />
+                  )}
+                  {/* Subtle Gradient overlay to ensure text is always readable over images */}
+                  <div className={`absolute inset-0 ${n.image ? 'bg-gradient-to-t from-navy-dark/95 via-navy-dark/40 to-transparent' : 'bg-gradient-to-br from-navy/30 via-navy-dark/60 to-navy-dark/90'} z-0`} />
+                  
+                  <div className="absolute top-4 left-4 z-10 inline-flex items-center gap-1.5 rounded-full bg-coral text-white text-[10px] font-extrabold uppercase tracking-widest px-3 py-1.5 shadow-sm">
                     {n.tag === "Event" ? <Calendar className="h-3 w-3" /> : <Anchor className="h-3 w-3" />}
                     {n.tag}
                   </div>
-                  <div className="relative z-10 text-white/90 text-xs font-bold uppercase tracking-wider">
+                  <div className="relative z-10 text-white/95 text-xs font-bold uppercase tracking-wider drop-shadow-md">
                     {n.date} <span className="mx-2 text-white/40">|</span> {n.location}
                   </div>
                 </div>
@@ -468,7 +490,7 @@ const Index = () => {
         </div>
       </section>
 
-      {/* ─────────── IMAGE GALLERY SECTION (NEW) ─────────── */}
+      {/* ─────────── IMAGE GALLERY SECTION ─────────── */}
       <section className="pb-20 md:pb-24 pt-10 bg-white">
         <div className="container-page">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-5">
@@ -493,7 +515,6 @@ const Index = () => {
         className="relative py-20 md:py-24 bg-cover bg-center bg-no-repeat bg-warm-gray"
         style={{ backgroundImage: `url("${waterImg}")` }}
       >
-        {/* Lowered opacity to 60% so the water image clearly shows through */}
         <div className="absolute inset-0 bg-white/60 backdrop-blur-[2px]" />
         
         <div className="container-page relative z-10">
@@ -561,14 +582,63 @@ const Index = () => {
                 </p>
               </div>
               <div className="relative mt-auto">
-                <Button asChild size="lg" className="w-full bg-coral hover:bg-coral-light text-white font-bold shadow-warm h-12 px-2 text-sm sm:text-base">
-                  <Link to="/get-involved#donate">Donate Now <ArrowRight className="ml-2 h-4 w-4" /></Link>
+                {/* Updated Donate button to trigger Modal */}
+                <Button onClick={() => setIsDonateOpen(true)} size="lg" className="w-full bg-coral hover:bg-coral-light text-white font-bold shadow-warm h-12 px-2 text-sm sm:text-base cursor-pointer">
+                  Donate Now <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
               </div>
             </div>
           </div>
         </div>
       </section>
+
+      {/* ─────────── MODAL: DONATION WIDGET ─────────── */}
+      {isDonateOpen && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-navy-dark/80 backdrop-blur-sm animate-fade-in">
+          <div className="bg-white rounded-2xl shadow-2xl w-full max-w-lg overflow-hidden relative" onClick={(e) => e.stopPropagation()}>
+            {/* Close Button */}
+            <button 
+              onClick={() => setIsDonateOpen(false)}
+              className="absolute top-4 right-4 h-8 w-8 flex items-center justify-center rounded-full bg-warm-gray text-navy hover:bg-coral hover:text-white transition-colors z-10 cursor-pointer"
+              aria-label="Close"
+            >
+              <X className="h-4 w-4" />
+            </button>
+            
+            <div className="p-8 text-center pt-10">
+              <Heart className="h-10 w-10 text-coral mx-auto mb-4" />
+              <h3 className="text-2xl font-extrabold text-navy mb-2">Support Our Mission</h3>
+              <p className="text-text-mid mb-6 text-sm leading-relaxed">
+                Your donation helps us provide essential care, hospitality, and support to seafarers visiting the Port of Toronto.
+              </p>
+              
+              {/* 
+                 ============= DEVELOPER NOTE ============= 
+                 Replace the content inside the div below with your 
+                 actual embedded donation widget code (e.g., CanadaHelps, 
+                 Zeffy, or Donorbox iframe/script tag).
+                 ==========================================
+              */}
+              <div className="border-2 border-dashed border-border rounded-xl p-8 bg-warm-gray min-h-[200px] flex flex-col items-center justify-center">
+                <p className="text-navy font-bold text-sm">
+                  [ Insert Donation Widget Embed Code Here ]
+                </p>
+                <p className="text-xs text-text-mid mt-2 mb-4">
+                  (e.g., CanadaHelps, Donorbox, or Zeffy)
+                </p>
+                
+                {/* Fallback external link button if you prefer standard routing over embeds */}
+                <Button asChild className="mt-2 bg-coral text-white hover:bg-coral-light w-full">
+                  <a href="https://www.missiontoseafarers.ca/donate" target="_blank" rel="noopener noreferrer">
+                    Go to National Donation Page
+                  </a>
+                </Button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 };

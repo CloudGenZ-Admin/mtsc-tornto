@@ -84,7 +84,7 @@ const Contact = () => {
                   </span>
                   <span>
                     <span className="block text-white/60 text-[11px] uppercase font-bold tracking-widest">Location</span>
-                    8 Unwin Ave, Toronto, ON M5A 1A1, Canada
+                    Cruise Ship Terminal, 8 Unwin Ave, Toronto, ON M5A 1A1, Canada
                   </span>
                 </li>
                 <li className="flex gap-3.5">
@@ -121,9 +121,11 @@ const Contact = () => {
               <p className="mb-3">
                 Mission to Seafarers Toronto operates as part of Mission to Seafarers Canada.
               </p>
+              <p className="mb-3">
+                Local volunteer opportunities, station engagement, community support, and monthly and one-time donations are coordinated through the Toronto station.
+              </p>
               <p>
-                Local volunteer opportunities, station engagement, and community support are coordinated through the Toronto station.{" "}
-                <span className="text-navy font-semibold">Donations, major gifts, and national corporate partnerships</span> are managed through Mission to Seafarers Canada.
+                Major gifts and national corporate partnerships are managed through the National Office, Mission to Seafarers Canada.
               </p>
             </div>
           </div>

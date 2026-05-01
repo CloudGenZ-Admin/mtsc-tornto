@@ -69,7 +69,7 @@ export const SiteFooter = () => {
         <div>
           <h4 className="text-sm font-extrabold uppercase tracking-wider text-coral-light mb-4">National Office</h4>
           <p className="text-sm text-white/70 leading-relaxed">
-            Major gifts, monthly giving, and corporate partnerships are managed through{" "}
+            Major gifts, and corporate partnerships are managed through{" "}
             <span className="text-white font-semibold">Mission to Seafarers Canada</span>.
           </p>
         </div>

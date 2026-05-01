@@ -1,9 +1,13 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { PageHero } from "@/components/PageHero";
 
 // Hero / About Image
 import aboutImg from "@/assets/About.jpg";
+
+// Images - History Timeline
+import historyImg1 from "@/assets/image (5).png";
+import historyImg2 from "@/assets/image (3).png";
+import historyImg3 from "@/assets/image (4).png";
 
 // Images - Team
 import judithMainImg from "@/assets/Toronto Station Chaplin And manager-Rev.Judith Alltree.png";
@@ -37,6 +41,44 @@ const boardMembers = [
   { name: "Isabelle Therrien", role: "Director", img: isabelleImg },
 ];
 
+const historyBlocks = [
+  {
+    era: "1960s - 1970s",
+    title: "The Beginning & A Permanent Home",
+    content: (
+      <>
+        <p>The Toronto Station of The Mission to Seafarers has been serving seafarers in the Port of Toronto since the early 1960s. It is believed the Mission first began around 1961 and, in its earliest years, operated in connection with the Lutheran Church in Toronto.</p>
+        <p className="mt-4">Before the Mission had a permanent building, there was an industrial trailer located in or near the Port. At that time, there was very little security between the harbour and Cherry Street, allowing seafarers to simply walk from their ships to the Mission.</p>
+        <p className="mt-4">In the early 1970s, Viceroy Homes donated an Alpine-style cottage to become the Toronto Mission’s first and only permanent building. This building served as the home of the Mission until January 2019. It included both an upstairs and downstairs, and over time a large commercial kitchen and a spacious back patio were added. The station became known as a place of hospitality, fellowship, and practical support, especially during the summer months when donated barbecues were often used to host seafarers.</p>
+      </>
+    ),
+    img: historyImg3,
+  },
+  {
+    era: "Decades of Service - 2019",
+    title: "A Home Away From Home & A Devastating Loss",
+    content: (
+      <>
+        <p>For decades, the Toronto Station provided far more than a building. It became a “home away from home” for seafarers arriving in Toronto, many of whom were far from family, short on money, and facing long periods at sea. One memorable story recalls a crew arriving from Kyiv with nowhere to stay before joining their ship. The Mission welcomed them, provided a meal, shelter, and transportation to their vessel. During their week in Toronto, they returned each evening to use the Mission’s Wi-Fi to connect with their families across the world.</p>
+        <p className="mt-4">The Toronto Mission remained the last active harbour mission presence after the Lutheran and Catholic churches had left the waterfront many years earlier, with the Anglicans continuing the ministry. Until 2019, the station maintained a physical location in the port, while also focusing heavily on ship visiting and pastoral care.</p>
+        <p className="mt-4">In January 2019, the historic station was lost following a devastating flood, at the same time the Port was preparing to demolish the building to make way for road expansion. The loss meant that many historical items and records connected to the Mission could not be preserved.</p>
+      </>
+    ),
+    img: historyImg2,
+  },
+  {
+    era: "Today",
+    title: "A New Chapter",
+    content: (
+      <>
+        <p>Now, after seven years, the Toronto Station is beginning a new chapter. With the support of the Toronto Port Authority, The Mission to Seafarers is reopening a new station space within the Port of Toronto. The new location is being designed to once again provide seafarers with a welcoming place to rest, connect with loved ones, receive support, and experience the care and community that has defined the Toronto Mission since the early 1960s.</p>
+        <p className="mt-4">Whether it is offering Wi-Fi, a haircut, transportation, a warm drink, a listening ear, or simply a place to rest, each act of support is part of something much larger: a connected network of care reaching from Toronto to ports across Canada and around the world.</p>
+      </>
+    ),
+    img: historyImg1,
+  }
+];
+
 const About = () => (
   <>
     {/* Hero Section */}
@@ -59,34 +101,58 @@ const About = () => (
       </div>
     </section>
 
-    {/* History */}
-    <section className="py-20 md:py-28 bg-warm-gray">
-      <div className="container-page max-w-4xl mx-auto">
-        <div className="space-y-6 text-base md:text-lg text-text-mid leading-relaxed">
-          <p>
-            The Toronto Station of The Mission to Seafarers has been serving seafarers in the Port of Toronto since the early 1960s. It is believed the Mission first began around 1961 and, in its earliest years, operated in connection with the Lutheran Church in Toronto.
-          </p>
-          <p>
-            Before the Mission had a permanent building, there was an industrial trailer located in or near the Port. At that time, there was very little security between the harbour and Cherry Street, allowing seafarers to simply walk from their ships to the Mission.
-          </p>
-          <p>
-            In the early 1970s, Viceroy Homes donated an Alpine-style cottage to become the Toronto Mission’s first and only permanent building. This building served as the home of the Mission until January 2019. It included both an upstairs and downstairs, and over time a large commercial kitchen and a spacious back patio were added. The station became known as a place of hospitality, fellowship, and practical support, especially during the summer months when donated barbecues were often used to host seafarers.
-          </p>
-          <p>
-            For decades, the Toronto Station provided far more than a building. It became a “home away from home” for seafarers arriving in Toronto, many of whom were far from family, short on money, and facing long periods at sea. One memorable story recalls a crew arriving from Kyiv with nowhere to stay before joining their ship. The Mission welcomed them, provided a meal, shelter, and transportation to their vessel. During their week in Toronto, they returned each evening to use the Mission’s Wi-Fi to connect with their families across the world.
-          </p>
-          <p>
-            The Toronto Mission remained the last active harbour mission presence after the Lutheran and Catholic churches had left the waterfront many years earlier, with the Anglicans continuing the ministry. Until 2019, the station maintained a physical location in the port, while also focusing heavily on ship visiting and pastoral care.
-          </p>
-          <p>
-            In January 2019, the historic station was lost following a devastating flood, at the same time the Port was preparing to demolish the building to make way for road expansion. The loss meant that many historical items and records connected to the Mission could not be preserved.
-          </p>
-          <p>
-            Now, after seven years, the Toronto Station is beginning a new chapter. With the support of the Toronto Port Authority, The Mission to Seafarers is reopening a new station space within the Port of Toronto. The new location is being designed to once again provide seafarers with a welcoming place to rest, connect with loved ones, receive support, and experience the care and community that has defined the Toronto Mission since the early 1960s.
-          </p>
-          <p>
-            Whether it is offering Wi-Fi, a haircut, transportation, a warm drink, a listening ear, or simply a place to rest, each act of support is part of something much larger: a connected network of care reaching from Toronto to ports across Canada and around the world.
-          </p>
+    {/* Visually Engaging History Timeline Section */}
+    <section className="py-24 bg-warm-gray overflow-hidden">
+      <div className="container-page">
+        <div className="max-w-3xl mx-auto text-center mb-20">
+          <span className="text-coral font-bold tracking-widest uppercase text-sm">Our Story</span>
+          <h2 className="mt-4 text-3xl md:text-5xl font-extrabold text-navy leading-tight">
+            Decades of Care at the Port of Toronto
+          </h2>
+        </div>
+
+        <div className="space-y-20 md:space-y-32 relative max-w-6xl mx-auto">
+          {/* Vertical connecting line for desktop */}
+          <div className="hidden md:block absolute left-1/2 top-4 bottom-4 w-[2px] bg-coral/20 -translate-x-1/2"></div>
+
+          {historyBlocks.map((block, idx) => (
+            <div key={idx} className={`relative flex flex-col md:flex-row items-center gap-10 md:gap-16 lg:gap-24 ${idx % 2 !== 0 ? 'md:flex-row-reverse' : ''}`}>
+              
+              {/* Timeline Center Dot */}
+              <div className="hidden md:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white border-4 border-coral items-center justify-center z-10 shadow-md">
+                <div className="w-3 h-3 bg-coral rounded-full"></div>
+              </div>
+
+              {/* Image Side */}
+              <div className="w-full md:w-1/2 relative group">
+                <div className="aspect-[4/3] rounded-3xl overflow-hidden shadow-card group-hover:shadow-card-hover transition-all duration-500 border-4 border-white">
+                  <img 
+                    src={block.img} 
+                    alt={block.title} 
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" 
+                  />
+                </div>
+                {/* Year Badge overlay on desktop */}
+                <div className={`absolute top-8 ${idx % 2 !== 0 ? '-left-8' : '-right-8'} bg-navy text-white px-8 py-3 rounded-xl shadow-xl z-20 hidden md:block transform transition-transform group-hover:-translate-y-2`}>
+                  <span className="text-xl font-bold tracking-wider">{block.era}</span>
+                </div>
+              </div>
+
+              {/* Content Side */}
+              <div className="w-full md:w-1/2 space-y-6 bg-white md:bg-transparent p-8 md:p-0 rounded-3xl shadow-sm md:shadow-none border md:border-none border-border relative z-10">
+                {/* Year Badge for mobile */}
+                <div className="md:hidden inline-block bg-coral text-white px-4 py-2 rounded-lg text-sm font-bold mb-2">
+                  {block.era}
+                </div>
+                
+                <h3 className="text-2xl md:text-3xl font-extrabold text-navy">{block.title}</h3>
+                
+                <div className="text-text-mid text-lg leading-relaxed space-y-4 font-medium">
+                  {block.content}
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>

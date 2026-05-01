@@ -9,8 +9,9 @@ import {
   Heart, Package, Briefcase, Users, DollarSign, HandHeart, CheckCircle2, X, Gift
 } from "lucide-react";
 
-// Image import for the Hero Background
+// Image import for the Hero Background & Maritime Design
 import getInvolvedBg from "@/assets/GetInvoled.avif";
+import maritimeImage from "@/assets/GTimagemaritime.jpg";
 
 // ==========================================
 // FORM COMPONENTS
@@ -379,11 +380,26 @@ const GetInvolved = () => {
       </section>
 
       {/* Interactive Forms / Ways to Help Section */}
-      <section id="ways-to-help" className="py-20 md:py-28 bg-warm-gray scroll-mt-24">
-        <div className="container-page">
+      <section id="ways-to-help" className="relative py-20 md:py-28 scroll-mt-24 overflow-hidden">
+        
+        {/* Background Image Added to this Section with Navy Blue Overlay */}
+        <div className="absolute inset-0 z-0 ">
+          <img 
+            src={maritimeImage} 
+            alt="Ways to help background" 
+            className="w-full h-full object-cover object-center " 
+          />
+          {/* Blue overlay to match design and ensure text readability */}
+          <div className="absolute inset-0 bg-gradient-to-b from-navy/80 via-navy/60 to-navy/90" />
+        </div>
+
+        <div className="container-page relative z-10">
           <div className="text-center mb-10">
-            <span className="eyebrow mb-3">Other Ways to Help</span>
-            <h2 className="text-3xl md:text-4xl font-extrabold text-navy">Choose How You Would Like to Support</h2>
+            {/* Styled "eyebrow" specifically for the dark background */}
+            <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full  text-coral-light text-xs font-extrabold uppercase tracking-widest mb-4 border border-coral/30">
+              Other Ways to Help
+            </span>
+            <h2 className="text-3xl md:text-4xl font-extrabold text-white">Choose How You Would Like to Support</h2>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-12 max-w-4xl mx-auto">
@@ -397,22 +413,35 @@ const GetInvolved = () => {
                     setTimeout(() => scrollToSection('ways-to-help-forms'), 100);
                   }
                 }}
-                className={`form-trigger-btn p-6 rounded-xl border text-center transition-all hover:shadow-card hover:-translate-y-1 ${activeForm === card.id ? "border-coral bg-coral-pale shadow-md" : "border-border bg-white"
-                  }`}
+                className={`form-trigger-btn p-6 rounded-xl border text-center transition-all hover:shadow-card hover:-translate-y-1 ${
+                  activeForm === card.id 
+                    ? "border-coral bg-coral-pale shadow-md" 
+                    : "border-coral/90 bg-coral text-white"
+                }`}
               >
-                <card.icon className={`h-10 w-10 mx-auto mb-4 ${activeForm === card.id ? "text-coral" : "text-navy"}`} />
-                <h3 className="font-bold text-navy mb-2 text-lg">{card.title}</h3>
-                <p className="text-sm text-text-mid">{card.desc}</p>
+                <card.icon className={`h-10 w-10 mx-auto mb-4 ${activeForm === card.id ? "text-coral" : "text-white"}`} />
+                <h3 className={`font-bold mb-2 text-lg ${activeForm === card.id ? "text-navy" : "text-white"}`}>{card.title}</h3>
+                <p className={`text-sm ${activeForm === card.id ? "text-text-mid" : "text-white/90"}`}>{card.desc}</p>
               </button>
             ))}
           </div>
 
           <div id="ways-to-help-forms" className="max-w-3xl mx-auto scroll-mt-32" ref={formContainerRef}>
-            {renderActiveForm() || (
-              <div className="text-center p-10 border-2 border-dashed border-border rounded-2xl">
-                <p className="text-text-mid font-medium">Select an option above to view the details and fill out a form.</p>
+            {/* {renderActiveForm() || (
+              <div className="w-full rounded-2xl overflow-hidden border border-border shadow-sm">
+                <img 
+                  src={maritimeImage} 
+                  alt="Maritime Design" 
+                  className="w-full h-48 sm:h-64 md:h-80 object-cover object-center" 
+                />
               </div>
-            )}
+            )} */}
+
+            {
+              renderActiveForm()
+            }
+
+
           </div>
         </div>
       </section>
