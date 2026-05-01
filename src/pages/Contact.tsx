@@ -93,7 +93,9 @@ const Contact = () => {
                   </span>
                   <span>
                     <span className="block text-white/60 text-[11px] uppercase font-bold tracking-widest">Email</span>
-                    glutenfreepriest@gmail.com
+                    <a href="mailto:glutenfreepriest@gmail.com" className="text-white hover:text-coral-light transition-colors underline">
+                      glutenfreepriest@gmail.com
+                    </a>
                   </span>
                 </li>
                 <li className="flex gap-3.5">
@@ -102,7 +104,9 @@ const Contact = () => {
                   </span>
                   <span>
                     <span className="block text-white/60 text-[11px] uppercase font-bold tracking-widest">Phone</span>
-                    +1 416-469-5391
+                    <a href="tel:+14164695391" className="text-white hover:text-coral-light transition-colors underline">
+                      +1 416-469-5391
+                    </a>
                   </span>
                 </li>
                 <li className="flex gap-3.5">

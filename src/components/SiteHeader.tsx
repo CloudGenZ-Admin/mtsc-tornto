@@ -1,7 +1,13 @@
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { useEffect, useState, useRef } from "react";
-import { Menu, X, ChevronDown, Package } from "lucide-react";
+import { Menu, X, ChevronDown, Package, Gift } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 
 import logo from "@/assets/WhatsApp Image 2026-04-27 at 9.32.12 AM.jpeg";
 
@@ -17,6 +23,7 @@ export const SiteHeader = () => {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [mobileExpanded, setMobileExpanded] = useState<string | null>(null);
+  const [donateDialogOpen, setDonateDialogOpen] = useState(false);
   const location = useLocation();
   const headerRef = useRef<HTMLElement>(null);
 
@@ -153,8 +160,12 @@ export const SiteHeader = () => {
           </Button>
 
           {/* Large Orange Donate Button */}
-          <Button asChild size="lg" className="bg-coral hover:bg-coral-light text-white font-bold shadow-warm hover:shadow-warm-hover px-5 xl:px-6 text-sm xl:text-base whitespace-nowrap cursor-pointer">
-            <Link to="/get-involved#donate">Donate</Link>
+          <Button 
+            onClick={() => setDonateDialogOpen(true)}
+            size="lg" 
+            className="bg-coral hover:bg-coral-light text-white font-bold shadow-warm hover:shadow-warm-hover px-5 xl:px-6 text-sm xl:text-base whitespace-nowrap cursor-pointer"
+          >
+            Donate
           </Button>
         </div>
 
@@ -242,13 +253,41 @@ export const SiteHeader = () => {
                   Send a Prayer
                 </a>
               </Button>
-              <Button asChild className="bg-coral hover:bg-coral-light text-white font-extrabold w-full text-lg h-14">
-                <Link to="/get-involved#donate">Donate</Link>
+              <Button 
+                onClick={() => {
+                  setDonateDialogOpen(true);
+                  setOpen(false);
+                }}
+                className="bg-coral hover:bg-coral-light text-white font-extrabold w-full text-lg h-14"
+              >
+                Donate
               </Button>
             </div>
           </div>
         </div>
       )}
+
+      {/* Donate Dialog Popup */}
+      <Dialog open={donateDialogOpen} onOpenChange={setDonateDialogOpen}>
+        <DialogContent className="max-w-5xl h-[95vh] p-0 overflow-hidden flex flex-col">
+          <DialogHeader className="p-4 pb-3 shrink-0 border-b">
+            <DialogTitle className="flex items-center gap-3 text-xl font-extrabold text-navy">
+              <Gift className="h-5 w-5 text-coral" />
+              Secure Donation Form
+            </DialogTitle>
+          </DialogHeader>
+          <div className="flex-1 overflow-hidden p-2">
+            <div className="w-full h-full bg-white rounded-lg border border-border overflow-hidden">
+              <iframe
+                src="https://www.canadahelps.org/en/dn/145961"
+                title="CanadaHelps Secure Donation Form"
+                className="w-full h-full border-none block bg-transparent"
+                allow="payment"
+              ></iframe>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
     </header>
   );
 };

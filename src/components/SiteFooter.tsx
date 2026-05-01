@@ -61,7 +61,12 @@ export const SiteFooter = () => {
           <h4 className="text-sm font-extrabold uppercase tracking-wider text-coral-light mb-4">Toronto Station</h4>
           <ul className="space-y-3 text-sm">
             <li className="flex gap-2.5"><MapPin className="h-4 w-4 mt-0.5 shrink-0 text-coral-light" />Port of Toronto, ON</li>
-            <li className="flex gap-2.5"><Mail className="h-4 w-4 mt-0.5 shrink-0 text-coral-light" />glutenfreepriest@gmail.com</li>
+            <li className="flex gap-2.5">
+              <Mail className="h-4 w-4 mt-0.5 shrink-0 text-coral-light" />
+              <a href="mailto:glutenfreepriest@gmail.com" className="hover:text-coral-light transition-colors">
+                glutenfreepriest@gmail.com
+              </a>
+            </li>
             {/* <li className="flex gap-2.5"><Phone className="h-4 w-4 mt-0.5 shrink-0 text-coral-light" />By appointment</li> */}
           </ul>
         </div>

@@ -2,9 +2,15 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import {
   ArrowRight, Anchor, Wifi, Coffee, Heart, Scissors, Users, Globe2, HandHeart,
   Calendar, MapPin, Ship, Package, LifeBuoy, ShieldCheck, HeartHandshake, Building2, Home as HomeIcon, ChevronRight,
-  ChevronDown, X
+  ChevronDown, X, Gift
 } from "lucide-react";
 
 // Image imports for the Hero Section
@@ -593,52 +599,26 @@ const Index = () => {
       </section>
 
       {/* ─────────── MODAL: DONATION WIDGET ─────────── */}
-      {isDonateOpen && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-navy-dark/80 backdrop-blur-sm animate-fade-in">
-          <div className="bg-white rounded-2xl shadow-2xl w-full max-w-lg overflow-hidden relative" onClick={(e) => e.stopPropagation()}>
-            {/* Close Button */}
-            <button 
-              onClick={() => setIsDonateOpen(false)}
-              className="absolute top-4 right-4 h-8 w-8 flex items-center justify-center rounded-full bg-warm-gray text-navy hover:bg-coral hover:text-white transition-colors z-10 cursor-pointer"
-              aria-label="Close"
-            >
-              <X className="h-4 w-4" />
-            </button>
-            
-            <div className="p-8 text-center pt-10">
-              <Heart className="h-10 w-10 text-coral mx-auto mb-4" />
-              <h3 className="text-2xl font-extrabold text-navy mb-2">Support Our Mission</h3>
-              <p className="text-text-mid mb-6 text-sm leading-relaxed">
-                Your donation helps us provide essential care, hospitality, and support to seafarers visiting the Port of Toronto.
-              </p>
-              
-              {/* 
-                 ============= DEVELOPER NOTE ============= 
-                 Replace the content inside the div below with your 
-                 actual embedded donation widget code (e.g., CanadaHelps, 
-                 Zeffy, or Donorbox iframe/script tag).
-                 ==========================================
-              */}
-              <div className="border-2 border-dashed border-border rounded-xl p-8 bg-warm-gray min-h-[200px] flex flex-col items-center justify-center">
-                <p className="text-navy font-bold text-sm">
-                  [ Insert Donation Widget Embed Code Here ]
-                </p>
-                <p className="text-xs text-text-mid mt-2 mb-4">
-                  (e.g., CanadaHelps, Donorbox, or Zeffy)
-                </p>
-                
-                {/* Fallback external link button if you prefer standard routing over embeds */}
-                <Button asChild className="mt-2 bg-coral text-white hover:bg-coral-light w-full">
-                  <a href="https://www.missiontoseafarers.ca/donate" target="_blank" rel="noopener noreferrer">
-                    Go to National Donation Page
-                  </a>
-                </Button>
-              </div>
-
+      <Dialog open={isDonateOpen} onOpenChange={setIsDonateOpen}>
+        <DialogContent className="max-w-5xl h-[95vh] p-0 overflow-hidden flex flex-col">
+          <DialogHeader className="p-[6px] pb-3 shrink-0 border-b">
+            <DialogTitle className="flex items-center gap-3 text-xl font-extrabold text-navy">
+              <Gift className="h-5 w-5 text-coral" />
+              Secure Donation Form
+            </DialogTitle>
+          </DialogHeader>
+          <div className="flex-1 overflow-hidden p-2">
+            <div className="w-full h-full bg-white rounded-lg border border-border overflow-hidden">
+              <iframe
+                src="https://www.canadahelps.org/en/dn/145961"
+                title="CanadaHelps Secure Donation Form"
+                className="w-full h-full border-none block bg-transparent"
+                allow="payment"
+              ></iframe>
             </div>
           </div>
-        </div>
-      )}
+        </DialogContent>
+      </Dialog>
     </>
   );
 };

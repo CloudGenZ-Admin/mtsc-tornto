@@ -20,11 +20,32 @@ import heroBg from "@/assets/SeasurferSupport.avif";
 
 const HaircutForm = ({ onClose }: { onClose: () => void }) => {
   const [form, setForm] = useState({ name: "", ship: "", expectedDate: "", contact: "", notes: "" });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    toast({ title: "Haircut Request received", description: "Our team will contact you to confirm." });
-    setForm({ name: "", ship: "", expectedDate: "", contact: "", notes: "" });
+    setIsSubmitting(true);
+
+    const formData = new FormData();
+    formData.append("entry.5884385", form.name);
+    formData.append("entry.1886612943", form.ship);
+    if (form.expectedDate) formData.append("entry.1646593543", form.expectedDate);
+    formData.append("entry.183458349", form.contact);
+
+    try {
+      await fetch("https://docs.google.com/forms/d/e/1FAIpQLSewwuc8P89gcR7DuOzqEpQIKCNYFzk5wEXHG2TD8_0pBHpozA/formResponse", {
+        method: "POST",
+        mode: "no-cors",
+        body: formData
+      });
+      toast({ title: "Haircut Request received", description: "Our team will contact you to confirm." });
+      setForm({ name: "", ship: "", expectedDate: "", contact: "", notes: "" });
+      onClose();
+    } catch (error) {
+      toast({ title: "Error", description: "Failed to submit request. Please try again.", variant: "destructive" });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -44,18 +65,41 @@ const HaircutForm = ({ onClose }: { onClose: () => void }) => {
         <div><Label>Expected Date in Port</Label><Input type="date" value={form.expectedDate} onChange={e => setForm({ ...form, expectedDate: e.target.value })} className="mt-1.5 bg-white" /></div>
         <div><Label>WhatsApp or Email *</Label><Input required value={form.contact} onChange={e => setForm({ ...form, contact: e.target.value })} className="mt-1.5 bg-white" /></div>
       </div>
-      <Button type="submit" size="lg" className="w-full bg-coral hover:bg-coral-light text-white font-bold h-12">Submit Booking</Button>
+      <Button type="submit" size="lg" disabled={isSubmitting} className="w-full bg-coral hover:bg-coral-light text-white font-bold h-12">
+        {isSubmitting ? "Submitting..." : "Submit Booking"}
+      </Button>
     </form>
   );
 };
 
 const VisitForm = ({ onClose }: { onClose: () => void }) => {
   const [form, setForm] = useState({ name: "", ship: "", contact: "", location: "" });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    toast({ title: "Visit Request received", description: "Our team will schedule a visit to your ship." });
-    setForm({ name: "", ship: "", contact: "", location: "" });
+    setIsSubmitting(true);
+
+    const formData = new FormData();
+    formData.append("entry.1868319619", form.name);
+    formData.append("entry.2061211079", form.ship);
+    if (form.location) formData.append("entry.2068264623", form.location);
+    formData.append("entry.419020187", form.contact);
+
+    try {
+      await fetch("https://docs.google.com/forms/d/e/1FAIpQLScUb1Gf7WIkQ1VNhSMV9qMjLcSX1LLfxjA3im4MOcCMsla3pQ/formResponse", {
+        method: "POST",
+        mode: "no-cors",
+        body: formData
+      });
+      toast({ title: "Visit Request received", description: "Our team will schedule a visit to your ship." });
+      setForm({ name: "", ship: "", contact: "", location: "" });
+      onClose();
+    } catch (error) {
+      toast({ title: "Error", description: "Failed to submit request. Please try again.", variant: "destructive" });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -75,18 +119,40 @@ const VisitForm = ({ onClose }: { onClose: () => void }) => {
         <div><Label>Port Location / Pier</Label><Input value={form.location} onChange={e => setForm({ ...form, location: e.target.value })} className="mt-1.5 bg-white" /></div>
         <div><Label>WhatsApp or Email *</Label><Input required value={form.contact} onChange={e => setForm({ ...form, contact: e.target.value })} className="mt-1.5 bg-white" /></div>
       </div>
-      <Button type="submit" size="lg" className="w-full bg-coral hover:bg-coral-light text-white font-bold h-12">Schedule Visit</Button>
+      <Button type="submit" size="lg" disabled={isSubmitting} className="w-full bg-coral hover:bg-coral-light text-white font-bold h-12">
+        {isSubmitting ? "Scheduling..." : "Schedule Visit"}
+      </Button>
     </form>
   );
 };
 
 const ChaplainForm = ({ onClose }: { onClose: () => void }) => {
   const [form, setForm] = useState({ name: "", contact: "", message: "" });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    toast({ title: "Message sent", description: "The Chaplain will reach out to you privately." });
-    setForm({ name: "", contact: "", message: "" });
+    setIsSubmitting(true);
+
+    const formData = new FormData();
+    if (form.name) formData.append("entry.1930479521", form.name);
+    formData.append("entry.1472187123", form.contact);
+    formData.append("entry.2131322220", form.message);
+
+    try {
+      await fetch("https://docs.google.com/forms/d/e/1FAIpQLSc3APd6y_AOFHMRbEE-H_q5viU0Hum6BZl3WwcA_L1jHdjF6g/formResponse", {
+        method: "POST",
+        mode: "no-cors",
+        body: formData
+      });
+      toast({ title: "Message sent", description: "The Chaplain will reach out to you privately." });
+      setForm({ name: "", contact: "", message: "" });
+      onClose();
+    } catch (error) {
+      toast({ title: "Error", description: "Failed to send message. Please try again.", variant: "destructive" });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -107,8 +173,8 @@ const ChaplainForm = ({ onClose }: { onClose: () => void }) => {
       </div>
       
       <div className="flex flex-col gap-3 mt-2">
-        <Button type="submit" size="lg" className="w-full bg-coral hover:bg-coral-light text-white font-bold h-12 flex gap-2 items-center justify-center">
-          Send Private Message
+        <Button type="submit" size="lg" disabled={isSubmitting} className="w-full bg-coral hover:bg-coral-light text-white font-bold h-12 flex gap-2 items-center justify-center">
+          {isSubmitting ? "Sending Message..." : "Send Private Message"}
         </Button>
         
         <div className="relative flex items-center py-2">
@@ -132,11 +198,31 @@ const ChaplainForm = ({ onClose }: { onClose: () => void }) => {
 
 const GeneralSupportForm = ({ onClose }: { onClose: () => void }) => {
   const [form, setForm] = useState({ name: "", contact: "", details: "" });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    toast({ title: "Support Request received", description: "We are here for you and will connect shortly." });
-    setForm({ name: "", contact: "", details: "" });
+    setIsSubmitting(true);
+
+    const formData = new FormData();
+    formData.append("entry.381520461", form.name);
+    formData.append("entry.1277424146", form.contact);
+    formData.append("entry.1910115958", form.details);
+
+    try {
+      await fetch("https://docs.google.com/forms/d/e/1FAIpQLSf2m9sNiF8rxlPfEWcAjPSQayvHTBSKjnjcaGYQQaaoNmWkIQ/formResponse", {
+        method: "POST",
+        mode: "no-cors",
+        body: formData
+      });
+      toast({ title: "Support Request received", description: "We are here for you and will connect shortly." });
+      setForm({ name: "", contact: "", details: "" });
+      onClose();
+    } catch (error) {
+      toast({ title: "Error", description: "Failed to submit request. Please try again.", variant: "destructive" });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -156,7 +242,9 @@ const GeneralSupportForm = ({ onClose }: { onClose: () => void }) => {
         <div><Label>WhatsApp or Email *</Label><Input required value={form.contact} onChange={e => setForm({ ...form, contact: e.target.value })} className="mt-1.5 bg-white" /></div>
         <div className="sm:col-span-2"><Label>How can we help? *</Label><Textarea rows={4} required value={form.details} onChange={e => setForm({ ...form, details: e.target.value })} className="mt-1.5 bg-white" /></div>
       </div>
-      <Button type="submit" size="lg" className="w-full bg-coral hover:bg-coral-light text-white font-bold h-12">Get Help</Button>
+      <Button type="submit" size="lg" disabled={isSubmitting} className="w-full bg-coral hover:bg-coral-light text-white font-bold h-12">
+        {isSubmitting ? "Submitting Request..." : "Get Help"}
+      </Button>
     </form>
   );
 };

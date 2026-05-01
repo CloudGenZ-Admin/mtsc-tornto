@@ -363,7 +363,7 @@ const GetInvolved = () => {
                     <X size={24} />
                   </button>
                 </div>
-                <div className="w-full bg-white rounded-xl border border-border overflow-hidden shadow-inner h-[800px] md:h-[900px]">
+                <div className="w-full bg-white rounded-xl border border-border overflow-hidden shadow-inner h-[750px] sm:h-[750px] md:h-[740px]">
                   <iframe
                     src="https://www.canadahelps.org/en/dn/145961"
                     title="CanadaHelps Secure Donation Form"
