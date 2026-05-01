@@ -14,6 +14,11 @@ import lounge from "@/assets/Algoma-Bear-Visit-21.avif";
 import judithImg from "@/assets/Toronto Station Chaplin And manager-Rev.Judith Alltree.png";
 import heroBg from "@/assets/SeasurferSupport.avif"; 
 
+// App Assets
+import happyAtSeaLogo from "@/assets/happy-sea-app.svg";
+import appStoreBtn from "@/assets/btn-appstore.png";
+import googlePlayBtn from "@/assets/btnapp-google-play.png.webp";
+
 // ==========================================
 // FORM COMPONENTS
 // ==========================================
@@ -463,19 +468,27 @@ const Support = () => {
                   Get help and support on a welfare or justice issue: <a href="mailto:crewhelp@mtsmail.org" className="font-bold text-white hover:text-coral transition-colors underline underline-offset-4 decoration-white/30">crewhelp@mtsmail.org</a>
                 </span>
               </li>
-              <li className="flex items-start gap-4">
-                <Smartphone className="h-7 w-7 text-coral shrink-0" />
-                <span>Connect instantly with a chaplain via our 24hr chat service (Happy at Sea app)</span>
-              </li>
             </ul>
 
-            <div className="flex flex-col sm:flex-row gap-4 relative z-10">
-              <a href="https://apps.apple.com/us/app/happy-at-sea/id6447320913" target="_blank" rel="noreferrer" className="flex items-center justify-center gap-3 bg-white hover:bg-warm-gray text-navy px-6 py-4 rounded-xl transition-colors font-bold w-full sm:w-auto shadow-sm">
-                Download the Happy at Sea App on the App Store
-              </a>
-              <a href="https://play.google.com/store/apps/details?id=org.missiontoseafarers.app&hl=en_IN" target="_blank" rel="noreferrer" className="flex items-center justify-center gap-3 bg-white hover:bg-warm-gray text-navy px-6 py-4 rounded-xl transition-colors font-bold w-full sm:w-auto shadow-sm">
-                Get the Happy at Sea App on Google Play
-              </a>
+            {/* Happy at Sea App Section */}
+            <div className="mt-8 bg-white rounded-2xl p-6 md:p-8 flex flex-col md:flex-row items-center gap-8 relative z-10 shadow-lg">
+              <div className="shrink-0">
+                <img src={happyAtSeaLogo} alt="Happy at Sea App Logo" className="w-28 h-28 md:w-32 md:h-32 object-contain" />
+              </div>
+              <div className="flex-1 text-center md:text-left">
+                <h4 className="text-2xl font-bold text-navy mb-2 flex items-center justify-center md:justify-start gap-2">
+                  <Smartphone className="h-6 w-6 text-coral" /> Happy at Sea App
+                </h4>
+                <p className="text-text-mid mb-6 text-lg font-medium">Connect instantly with a chaplain via our 24hr chat service.</p>
+                <div className="flex flex-wrap gap-4 justify-center md:justify-start">
+                  <a href="https://apps.apple.com/us/app/happy-at-sea/id6447320913" target="_blank" rel="noreferrer" className="inline-block transition-transform hover:scale-105">
+                    <img src={appStoreBtn} alt="Download on the App Store" className="h-12 w-auto object-contain" />
+                  </a>
+                  <a href="https://play.google.com/store/apps/details?id=org.missiontoseafarers.app&hl=en_IN" target="_blank" rel="noreferrer" className="inline-block transition-transform hover:scale-105">
+                    <img src={googlePlayBtn} alt="Get it on Google Play" className="h-12 w-auto object-contain" />
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
         </div>
