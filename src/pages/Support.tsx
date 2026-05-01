@@ -470,7 +470,7 @@ const Support = () => {
             </ul>
 
             <div className="flex flex-col sm:flex-row gap-4 relative z-10">
-              <a href="https://apps.apple.com/app/happy-at-sea/id1504998725" target="_blank" rel="noreferrer" className="flex items-center justify-center gap-3 bg-white hover:bg-warm-gray text-navy px-6 py-4 rounded-xl transition-colors font-bold w-full sm:w-auto shadow-sm">
+              <a href="https://apps.apple.com/us/app/happy-at-sea/id6447320913" target="_blank" rel="noreferrer" className="flex items-center justify-center gap-3 bg-white hover:bg-warm-gray text-navy px-6 py-4 rounded-xl transition-colors font-bold w-full sm:w-auto shadow-sm">
                 Download the Happy at Sea App on the App Store
               </a>
               <a href="https://play.google.com/store/apps/details?id=org.missiontoseafarers.app&hl=en_IN" target="_blank" rel="noreferrer" className="flex items-center justify-center gap-3 bg-white hover:bg-warm-gray text-navy px-6 py-4 rounded-xl transition-colors font-bold w-full sm:w-auto shadow-sm">
