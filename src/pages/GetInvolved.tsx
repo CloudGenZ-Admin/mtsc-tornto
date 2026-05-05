@@ -72,11 +72,12 @@ const DonateGoodsForm = ({ onClose }: FormProps) => {
           <Label>Donation Type *</Label>
           <select required value={form.category} onChange={e => setForm({ ...form, category: e.target.value })} className="flex h-10 w-full rounded-md border border-input bg-warm-gray px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring mt-1.5">
             <option value="" disabled>Select a category...</option>
-            <option value="Snacks & Refreshments">Snacks & Refreshments</option>
-            <option value="Gift Cards">Gift Cards</option>
-            <option value="Technology & Wi-Fi">Technology & Wi-Fi</option>
-            <option value="Haircut/Personal Care">Haircut & Personal Care</option>
-            <option value="Furniture">Furniture & Lounge Items</option>
+            {/* The values below must exactly match the options defined in your Google Form */}
+            <option value="Snacks and refreshments">Snacks and refreshments</option>
+            <option value="Gift cards">Gift cards</option>
+            <option value="Technology and Wi-Fi support">Technology and Wi-Fi support</option>
+            <option value="Haircut supplies and personal care items">Haircut supplies and personal care items</option>
+            <option value="Furniture and lounge items for the station">Furniture and lounge items for the station</option>
             <option value="Professional Services">Professional Services</option>
             <option value="Other">Other</option>
           </select>
@@ -184,12 +185,26 @@ const VolunteerForm = ({ onClose }: FormProps) => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    setTimeout(() => {
+
+    const data = new URLSearchParams();
+    data.append('entry.234123052', form.name);
+    data.append('entry.176043329', form.email);
+    data.append('entry.464588374', form.details);
+
+    try {
+      await fetch('https://docs.google.com/forms/d/e/1FAIpQLScbMdkRgXcG9TS9bv74f7wkbo3ZStTsQlcuAZk77I41tidsjw/formResponse', {
+        method: 'POST',
+        mode: 'no-cors',
+        body: data,
+      });
       toast({ title: "Volunteer Request Sent", description: "Thank you for your interest! We will contact you soon." });
       setForm({ name: "", email: "", details: "" });
-      setIsSubmitting(false);
       onClose();
-    }, 1000);
+    } catch (error) {
+      toast({ variant: "destructive", title: "Submission Failed", description: "There was an issue sending your request. Please try again." });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -427,21 +442,9 @@ const GetInvolved = () => {
           </div>
 
           <div id="ways-to-help-forms" className="max-w-3xl mx-auto scroll-mt-32" ref={formContainerRef}>
-            {/* {renderActiveForm() || (
-              <div className="w-full rounded-2xl overflow-hidden border border-border shadow-sm">
-                <img 
-                  src={maritimeImage} 
-                  alt="Maritime Design" 
-                  className="w-full h-48 sm:h-64 md:h-80 object-cover object-center" 
-                />
-              </div>
-            )} */}
-
             {
               renderActiveForm()
             }
-
-
           </div>
         </div>
       </section>
