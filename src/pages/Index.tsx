@@ -27,9 +27,16 @@ import eventImg2 from "@/assets/GlipmsOfevents2.avif";
 import eventImg3 from "@/assets/GlipmsOfevents3.avif";
 import eventImg4 from "@/assets/GettingSupport.avif";
 
+import newsImg1 from "@/assets/event1.jpeg";
+import newsImg2 from "@/assets/event2.jpeg";
+import newsImg3 from "@/assets/event3.jpeg";
+import newsImg4 from "@/assets/event4.jpeg";
+import newsImg5 from "@/assets/event5.webp";
+
 const Index = () => {
   const [showAllEvents, setShowAllEvents] = useState(false);
   const [isDonateOpen, setIsDonateOpen] = useState(false); // Controls the new Donate Pop-up
+  const [isHaircutOpen, setIsHaircutOpen] = useState(false); // Controls the Haircut Booking Pop-up
 
   const allUpdates = [
     {
@@ -38,7 +45,7 @@ const Index = () => {
       date: "May 20, 2026",
       location: "Port of Toronto",
       overview: "Join us as we celebrate the grand reopening of the Mission to Seafarers Toronto station alongside International Women in Maritime Day. This special event marks a new chapter after years of closure and highlights the vital role of women across the maritime sector.",
-      image: eventImg1
+      image: newsImg1
     },
     {
       tag: "Event",
@@ -46,7 +53,7 @@ const Index = () => {
       date: "June 25, 2026",
       location: "Toronto City Hall",
       overview: "Join us for a special flag-raising ceremony at Toronto City Hall to honour and recognize the vital contributions of seafarers worldwide.",
-      image: eventImg2
+      image: newsImg2
     },
     {
       tag: "Station News",
@@ -54,7 +61,7 @@ const Index = () => {
       date: "Coming Soon",
       location: "Toronto Station",
       overview: "We are thrilled to welcome the community to our new station space. Stay tuned for official dates and ways you can get involved locally.",
-      image: eventImg3
+      image: newsImg3
     },
     {
       tag: "Story",
@@ -62,7 +69,7 @@ const Index = () => {
       date: "Ongoing",
       location: "Port of Toronto",
       overview: "Read firsthand accounts of the seafarers arriving at the Port of Toronto and the impact that a simple, welcoming presence can have after weeks at sea.",
-      image: eventImg4
+      image: newsImg4
     },
     {
       tag: "Service",
@@ -70,7 +77,7 @@ const Index = () => {
       date: "Now Available",
       location: "Toronto Station",
       overview: "A small service that makes a meaningful difference after time at sea. We are now accepting advance bookings for haircut services upon arrival to ensure seafarers get the care they need.",
-      image: eventImg1
+      image: newsImg5
     }
   ];
 
@@ -213,7 +220,7 @@ const Index = () => {
                 tag: "Logistics",
                 title: "Seafarers Parcel Pickup Service",
                 body: "Order essentials online and have them delivered securely to our station for pickup when you dock.",
-                cta: "Go to parcel platform",
+                cta: "Send your Parcel",
                 to: "https://parcel.mtsc.ca/", // REPLACE WITH REAL PLATFORM URL
                 isExternal: true // Added logic for external link routing
               },
@@ -312,8 +319,8 @@ const Index = () => {
                 Availability is limited and scheduled around ship movements and volunteer capacity.
               </p>
               <div className="mt-8 flex flex-wrap gap-4">
-                <Button asChild size="lg" className="bg-coral hover:bg-coral-light text-white font-bold shadow-warm h-12">
-                  <Link to="/support#haircuts">Book a Haircut Appointment <ArrowRight className="ml-2 h-4 w-4" /></Link>
+                <Button onClick={() => setIsHaircutOpen(true)} size="lg" className="bg-coral hover:bg-coral-light text-white font-bold shadow-warm h-12 cursor-pointer">
+                  Book a Haircut Appointment <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
                 <Button asChild variant="outline" size="lg" className="border-2 border-navy text-navy hover:bg-navy hover:text-white font-bold h-12">
                   <Link to="/contact">Contact the Toronto Station</Link>
@@ -612,6 +619,28 @@ const Index = () => {
               <iframe
                 src="https://www.canadahelps.org/en/dn/145961"
                 title="CanadaHelps Secure Donation Form"
+                className="w-full h-full border-none block bg-transparent"
+                allow="payment"
+              ></iframe>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* ─────────── MODAL: HAIRCUT BOOKING ─────────── */}
+      <Dialog open={isHaircutOpen} onOpenChange={setIsHaircutOpen}>
+        <DialogContent className="max-w-5xl h-[95vh] p-0 overflow-hidden flex flex-col">
+          <DialogHeader className="p-[6px] pb-3 shrink-0 border-b">
+            <DialogTitle className="flex items-center gap-3 text-xl font-extrabold text-navy">
+              <Scissors className="h-5 w-5 text-coral" />
+              Book a Haircut Appointment
+            </DialogTitle>
+          </DialogHeader>
+          <div className="flex-1 overflow-hidden p-2">
+            <div className="w-full h-full bg-white rounded-lg border border-border overflow-hidden">
+              <iframe
+                src="https://www.zeffy.com/en-CA/ticketing/toronto-haircut-service"
+                title="Toronto Haircut Service Booking"
                 className="w-full h-full border-none block bg-transparent"
                 allow="payment"
               ></iframe>
