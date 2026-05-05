@@ -14,21 +14,26 @@ export const SiteFooter = () => {
       <div className="container-page py-14 grid gap-10 md:grid-cols-2 lg:grid-cols-4">
         <div>
           <Link 
-            to="/" 
-            className="flex items-center gap-2.5 group"
-            onClick={handleScrollToTop}
-          >
-            <img 
-              src={logo} 
-              alt="Mission to Seafarers Logo" 
-              // FIXED: Same update as header (w-auto, removed rounded-full and aspect-square)
-              className="h-10 md:h-12 w-auto shrink-0 object-contain rounded-md group-hover:scale-105 transition-transform" 
-            />
-            <span className="flex flex-col leading-none">
-              <span className="text-[15px] font-extrabold text-white">Mission to Seafarers</span>
-              <span className="text-[11px] font-bold uppercase tracking-[0.18em] text-coral-light">Toronto</span>
-            </span>
-          </Link>
+  to="/" 
+  className="flex items-center gap-2.5 group"
+  onClick={handleScrollToTop}
+>
+  <img 
+    src={logo} 
+    alt="Mission to Seafarers Logo" 
+    /* 
+      INCREASED SIZES:
+      Changed from: h-10 md:h-12
+      Changed to:   h-16 md:h-20
+      (This makes the footer logo match the header's mobile size, keeping w-auto so it scales correctly)
+    */
+    className="h-16 md:h-20 w-auto shrink-0 object-contain rounded-md group-hover:scale-105 transition-transform" 
+  />
+  <span className="flex flex-col leading-none justify-center">
+    <span className="text-[16px] md:text-[18px] font-extrabold text-white whitespace-nowrap">Mission to Seafarers</span>
+    <span className="text-[12px] md:text-[13px] font-bold uppercase tracking-[0.18em] text-coral-light mt-0.5 whitespace-nowrap">Toronto</span>
+  </span>
+</Link>
           <p className="mt-5 text-sm leading-relaxed text-white/70">
             A local presence at the Port of Toronto. Part of Mission to Seafarers Canada and the global
             network in 200+ ports.

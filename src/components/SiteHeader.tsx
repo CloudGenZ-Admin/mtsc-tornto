@@ -16,7 +16,7 @@ const nav = [
   { to: "/about", label: "About" },
   { to: "/support", label: "Seafarer Support" },
   { to: "/get-involved", label: "Get Involved" },
-  { to: "/contact", label: "Contact" }, 
+  { to: "/contact", label: "Contact" },
 ];
 
 export const SiteHeader = () => {
@@ -62,9 +62,8 @@ export const SiteHeader = () => {
   return (
     <header
       ref={headerRef}
-      className={`sticky top-0 z-50 w-full transition-all duration-300 ${
-        scrolled ? "bg-white/95 backdrop-blur-md shadow-soft" : "bg-white/80 backdrop-blur"
-      }`}
+      className={`sticky top-0 z-50 w-full transition-all duration-300 ${scrolled ? "bg-white/95 backdrop-blur-md shadow-soft" : "bg-white/80 backdrop-blur"
+        }`}
     >
       {/* 
         UPDATED CONTAINER: 
@@ -72,13 +71,14 @@ export const SiteHeader = () => {
         to ensure all buttons and nav items have enough room to sit on one line.
       */}
       <div className="w-full max-w-[1600px] mx-auto px-4 md:px-6 lg:px-8 flex h-20 items-center justify-between md:h-24 lg:h-28 gap-4">
-        
+
+        {/* Logo - Ensures text doesn't wrap using whitespace-nowrap */}
         {/* Logo - Ensures text doesn't wrap using whitespace-nowrap */}
         <Link to="/" className="flex items-center gap-2 lg:gap-3 group shrink-0">
-          <img 
-            src={logo} 
-            alt="Mission to Seafarers Logo" 
-            className="h-14 md:h-16 lg:h-[4.5rem] w-auto shrink-0 object-contain rounded-md group-hover:scale-105 transition-transform" 
+          <img
+            src={logo}
+            alt="Mission to Seafarers Logo"
+            className="h-20 md:h-20 lg:h-24 w-auto shrink-0 object-contain rounded-md group-hover:scale-105 transition-transform"
           />
           <span className="flex flex-col leading-none justify-center">
             <span className="text-[16px] lg:text-[15px] xl:text-[18px] font-extrabold text-navy whitespace-nowrap">Mission to Seafarers</span>
@@ -94,15 +94,14 @@ export const SiteHeader = () => {
                 <NavLink
                   to={n.to}
                   className={({ isActive }) =>
-                    `flex items-center gap-1 px-2 xl:px-3 py-2 text-[13px] xl:text-[15px] 2xl:text-base font-semibold whitespace-nowrap rounded-md transition-colors ${
-                      isActive || location.pathname.includes(n.to) ? "text-coral" : "text-navy hover:text-coral"
+                    `flex items-center gap-1 px-2 xl:px-3 py-2 text-[13px] xl:text-[15px] 2xl:text-base font-semibold whitespace-nowrap rounded-md transition-colors ${isActive || location.pathname.includes(n.to) ? "text-coral" : "text-navy hover:text-coral"
                     }`
                   }
                 >
                   {n.label}
                   <ChevronDown className="w-4 h-4 transition-transform group-hover:rotate-180" />
                 </NavLink>
-                
+
                 {/* Desktop Dropdown Menu */}
                 <div className="absolute left-0 top-full pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
                   <div className="w-56 bg-white rounded-xl shadow-card border border-border p-2 flex flex-col gap-1">
@@ -112,8 +111,7 @@ export const SiteHeader = () => {
                         to={sub.to}
                         end={sub.to === "/newsletter"}
                         className={({ isActive }) =>
-                          `block px-3 py-2 text-sm font-medium rounded-md transition-colors whitespace-normal ${
-                            isActive ? "bg-coral-pale text-coral" : "text-text-mid hover:text-navy hover:bg-warm-gray"
+                          `block px-3 py-2 text-sm font-medium rounded-md transition-colors whitespace-normal ${isActive ? "bg-coral-pale text-coral" : "text-text-mid hover:text-navy hover:bg-warm-gray"
                           }`
                         }
                       >
@@ -129,8 +127,7 @@ export const SiteHeader = () => {
                 to={n.to}
                 end={n.to === "/"}
                 className={({ isActive }) =>
-                  `px-2 xl:px-3 py-2 text-[13px] xl:text-[15px] 2xl:text-base font-semibold whitespace-nowrap rounded-md transition-colors ${
-                    isActive ? "text-coral" : "text-navy hover:text-coral"
+                  `px-2 xl:px-3 py-2 text-[13px] xl:text-[15px] 2xl:text-base font-semibold whitespace-nowrap rounded-md transition-colors ${isActive ? "text-coral" : "text-navy hover:text-coral"
                   }`
                 }
               >
@@ -151,7 +148,7 @@ export const SiteHeader = () => {
               <span className="2xl:hidden">Parcel Pickup</span>
             </a>
           </Button>
-          
+
           {/* Send a Prayer Button */}
           <Button asChild variant="outline" size="sm" className="border-navy text-navy hover:bg-navy hover:text-white font-bold whitespace-nowrap text-xs xl:text-sm px-3 xl:px-4">
             <a href="https://mtsc.ca/for-seafarers/prayer-wall/" target="_blank" rel="noopener noreferrer">
@@ -160,9 +157,9 @@ export const SiteHeader = () => {
           </Button>
 
           {/* Large Orange Donate Button */}
-          <Button 
+          <Button
             onClick={() => setDonateDialogOpen(true)}
-            size="lg" 
+            size="lg"
             className="bg-coral hover:bg-coral-light text-white font-bold shadow-warm hover:shadow-warm-hover px-5 xl:px-6 text-sm xl:text-base whitespace-nowrap cursor-pointer"
           >
             Donate
@@ -189,22 +186,19 @@ export const SiteHeader = () => {
                   <>
                     <button
                       onClick={() => toggleMobileAccordion(n.label)}
-                      className={`px-3 py-3 text-base font-semibold rounded-md flex items-center justify-between w-full text-left transition-colors ${
-                        location.pathname.includes(n.to) ? "bg-coral-pale text-coral" : "text-navy hover:bg-warm-gray"
-                      }`}
+                      className={`px-3 py-3 text-base font-semibold rounded-md flex items-center justify-between w-full text-left transition-colors ${location.pathname.includes(n.to) ? "bg-coral-pale text-coral" : "text-navy hover:bg-warm-gray"
+                        }`}
                     >
                       {n.label}
-                      <ChevronDown 
-                        className={`w-5 h-5 transition-transform duration-300 ${
-                          mobileExpanded === n.label ? "rotate-180" : ""
-                        }`} 
+                      <ChevronDown
+                        className={`w-5 h-5 transition-transform duration-300 ${mobileExpanded === n.label ? "rotate-180" : ""
+                          }`}
                       />
                     </button>
-                    
-                    <div 
-                      className={`overflow-hidden transition-all duration-300 ease-in-out ${
-                        mobileExpanded === n.label ? "max-h-[400px] opacity-100 mt-1" : "max-h-0 opacity-0"
-                      }`}
+
+                    <div
+                      className={`overflow-hidden transition-all duration-300 ease-in-out ${mobileExpanded === n.label ? "max-h-[400px] opacity-100 mt-1" : "max-h-0 opacity-0"
+                        }`}
                     >
                       <div className="flex flex-col gap-1 pl-4 border-l-2 border-warm-gray ml-3 mb-2">
                         {n.subItems.map((sub) => (
@@ -213,8 +207,7 @@ export const SiteHeader = () => {
                             to={sub.to}
                             end={sub.to === "/newsletter"}
                             className={({ isActive }) =>
-                              `px-3 py-2.5 text-sm font-medium rounded-md transition-colors ${
-                                isActive ? "text-coral font-bold bg-coral-pale/50" : "text-text-mid hover:text-navy hover:bg-warm-gray"
+                              `px-3 py-2.5 text-sm font-medium rounded-md transition-colors ${isActive ? "text-coral font-bold bg-coral-pale/50" : "text-text-mid hover:text-navy hover:bg-warm-gray"
                               }`
                             }
                           >
@@ -229,8 +222,7 @@ export const SiteHeader = () => {
                     to={n.to}
                     end={n.to === "/"}
                     className={({ isActive }) =>
-                      `px-3 py-3 text-base font-semibold rounded-md transition-colors ${
-                        isActive ? "bg-coral-pale text-coral" : "text-navy hover:bg-warm-gray"
+                      `px-3 py-3 text-base font-semibold rounded-md transition-colors ${isActive ? "bg-coral-pale text-coral" : "text-navy hover:bg-warm-gray"
                       }`
                     }
                   >
@@ -253,7 +245,7 @@ export const SiteHeader = () => {
                   Send a Prayer
                 </a>
               </Button>
-              <Button 
+              <Button
                 onClick={() => {
                   setDonateDialogOpen(true);
                   setOpen(false);
