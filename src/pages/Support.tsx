@@ -280,7 +280,7 @@ const Support = () => {
                 return (
                   <a
                     key={card.id}
-                    href="https://parcel.mtsc.ca"
+                    href="https://parcelservice.mtsc.ca"
                     target="_blank"
                     rel="noreferrer"
                     className="p-6 rounded-2xl border text-left transition-all hover:shadow-card hover:-translate-y-1 flex flex-col items-start border-border bg-white cursor-pointer group"

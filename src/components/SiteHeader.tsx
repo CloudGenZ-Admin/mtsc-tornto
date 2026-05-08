@@ -141,7 +141,7 @@ export const SiteHeader = () => {
         <div className="hidden lg:flex items-center gap-2 xl:gap-3 shrink-0">
           {/* Seafarer Parcel Pickup Service Button */}
           <Button asChild variant="outline" size="sm" className="border-border bg-warm-gray text-navy hover:bg-navy hover:text-white font-bold whitespace-nowrap text-xs xl:text-sm px-3 xl:px-4">
-            <a href="https://parcel.mtsc.ca/" target="_blank" rel="noopener noreferrer" className="flex items-center">
+            <a href="https://parcelservice.mtsc.ca/" target="_blank" rel="noopener noreferrer" className="flex items-center">
               <Package className="w-4 h-4 mr-1.5 hidden 2xl:block" />
               {/* Expands to full text ONLY on massive screens (2xl), otherwise stays short to save line space */}
               <span className="hidden 2xl:inline">Seafarer Parcel Pickup Service</span>
@@ -235,7 +235,7 @@ export const SiteHeader = () => {
             {/* Mobile CTAs */}
             <div className="flex flex-col gap-3 pt-4 border-t border-border mt-2">
               <Button asChild variant="outline" className="border-2 border-border bg-warm-gray text-navy font-bold w-full justify-start h-12">
-                <a href="https://parcel.mtsc.ca/" target="_blank" rel="noopener noreferrer">
+                <a href="https://parcelservice.mtsc.ca/" target="_blank" rel="noopener noreferrer">
                   <Package className="w-5 h-5 mr-2" />
                   Seafarer Parcel Pickup Service
                 </a>
