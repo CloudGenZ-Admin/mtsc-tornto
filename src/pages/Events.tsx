@@ -25,6 +25,7 @@ import eventImg1 from "@/assets/GlipmsOfevents.avif";
 import eventImg2 from "@/assets/GlipmsOfevents2.avif";
 import eventImg3 from "@/assets/GlipmsOfevents3.avif";
 import eventImg4 from "@/assets/GettingSupport.avif";
+import womenInMaritimeImg from "@/assets/newimg/Ho1Honouring Women in Maritime – From Policy to Practice.jpg";
 
 export default function Events() {
   const [isHighlightsModalOpen, setIsHighlightsModalOpen] = useState(false);
@@ -75,9 +76,9 @@ export default function Events() {
             {/* Event Image / Visual side */}
             <div className="lg:w-2/5 bg-navy relative min-h-[300px]">
               <img 
-                src="https://images.unsplash.com/photo-1542308101-df9cb790f95b?q=80&w=1000&auto=format&fit=crop" 
+                src={womenInMaritimeImg} 
                 alt="Women in Maritime" 
-                className="absolute inset-0 w-full h-full object-cover opacity-60 mix-blend-luminosity"
+                className="absolute inset-0 w-full h-full object-cover opacity-60 "
               />
               <div className="absolute inset-0 p-8 flex flex-col justify-end">
                 <span className="inline-block bg-coral text-white font-bold px-3 py-1 text-sm uppercase tracking-wider w-max mb-4 rounded-sm">
