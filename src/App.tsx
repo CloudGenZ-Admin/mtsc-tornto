@@ -22,7 +22,7 @@ import HamiltonStation from "./pages/HamiltonStation.tsx";
 import WhatsAhead from "./pages/WhatsAhead.tsx";
 import WaysToGetInvolvedArticle from "./pages/WaysToGetInvolvedArticle.tsx";
 import Announcements from "./pages/Announcements.tsx";
-
+import Events from "./pages/Events.tsx";
 const queryClient = new QueryClient();
 
 // Helper component that automatically scrolls to top on route change
@@ -60,6 +60,7 @@ const App = () => (
             <Route path="/whats-ahead" element={<WhatsAhead />} />
             <Route path="/ways-to-get-involved-article" element={<WaysToGetInvolvedArticle />} />
             <Route path="/announcements" element={<Announcements />} />
+            <Route path="/events" element={<Events />} />
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>

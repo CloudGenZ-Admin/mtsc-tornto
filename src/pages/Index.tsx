@@ -21,11 +21,7 @@ import skyline from "@/assets/toronto-skyline.png";
 import waterImg from "@/assets/water1.jpg";
 import seaImg from "@/assets/sea1.jpg";
 
-// Image imports for Gallery & Events
-import eventImg1 from "@/assets/GlipmsOfevents.avif";
-import eventImg2 from "@/assets/GlipmsOfevents2.avif";
-import eventImg3 from "@/assets/GlipmsOfevents3.avif";
-import eventImg4 from "@/assets/GettingSupport.avif";
+
 
 import newsImg1 from "@/assets/event1.jpeg";
 import newsImg2 from "@/assets/event2.jpeg";
@@ -443,85 +439,14 @@ const Index = () => {
       </section>
 
       {/* ─────────── NEWS & UPCOMING EVENTS STRIP ─────────── */}
-      <section id="events" className="pt-20 md:pt-24 bg-white">
-        <div className="container-page">
-          <div className="flex flex-wrap items-end justify-between gap-6 mb-10">
-            <div>
-              <span className="eyebrow">Latest from Toronto</span>
-              <h2 className="mt-5 text-3xl md:text-4xl font-extrabold text-navy leading-tight">
-                News and Upcoming Events
-              </h2>
-            </div>
+        
+   
 
-            <Button
-              variant="outline"
-              onClick={() => setShowAllEvents(!showAllEvents)}
-              className="border-2 border-navy text-navy hover:bg-navy hover:text-white font-bold cursor-pointer"
-            >
-              {showAllEvents ? "Show Less Updates" : "View Updates"}
-              <ChevronRight className={`ml-2 h-4 w-4 transition-transform ${showAllEvents ? "rotate-90" : ""}`} />
-            </Button>
-          </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {displayedUpdates.map((n) => (
-              <article key={n.title} className="group rounded-2xl border border-border bg-white overflow-hidden hover:shadow-card-hover hover:-translate-y-1 transition-all flex flex-col">
-                {/* Visual upgrade with images */}
-                <div className="aspect-[16/9] relative overflow-hidden shrink-0 flex items-end p-5">
-                  {n.image && (
-                    <img 
-                      src={n.image} 
-                      alt={n.title} 
-                      className="absolute inset-0 w-full h-full object-cover z-0 transition-transform duration-700 group-hover:scale-105" 
-                      loading="lazy" 
-                    />
-                  )}
-                  {/* Subtle Gradient overlay to ensure text is always readable over images */}
-                  <div className={`absolute inset-0 ${n.image ? 'bg-gradient-to-t from-navy-dark/95 via-navy-dark/40 to-transparent' : 'bg-gradient-to-br from-navy/30 via-navy-dark/60 to-navy-dark/90'} z-0`} />
-                  
-                  <div className="absolute top-4 left-4 z-10 inline-flex items-center gap-1.5 rounded-full bg-coral text-white text-[10px] font-extrabold uppercase tracking-widest px-3 py-1.5 shadow-sm">
-                    {n.tag === "Event" ? <Calendar className="h-3 w-3" /> : <Anchor className="h-3 w-3" />}
-                    {n.tag}
-                  </div>
-                  <div className="relative z-10 text-white/95 text-xs font-bold uppercase tracking-wider drop-shadow-md">
-                    {n.date} <span className="mx-2 text-white/40">|</span> {n.location}
-                  </div>
-                </div>
 
-                <div className="p-6 flex-1 flex flex-col">
-                  <h3 className="text-lg font-extrabold text-navy leading-snug group-hover:text-coral transition-colors">
-                    {n.title}
-                  </h3>
-
-                  <p className="mt-3 text-sm text-text-mid leading-relaxed line-clamp-3">
-                    {n.overview}
-                  </p>
-                </div>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* ─────────── IMAGE GALLERY SECTION ─────────── */}
-      <section className="pb-20 md:pb-24 pt-10 bg-white">
-        <div className="container-page">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-5">
-            <div className="overflow-hidden rounded-2xl shadow-sm group">
-              <img src={eventImg1} alt="Glimpse of events" className="w-full h-48 md:h-56 object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
-            </div>
-            <div className="overflow-hidden rounded-2xl shadow-sm group">
-              <img src={eventImg2} alt="Glimpse of events" className="w-full h-48 md:h-56 object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
-            </div>
-            <div className="overflow-hidden rounded-2xl shadow-sm group">
-              <img src={eventImg3} alt="Glimpse of events" className="w-full h-48 md:h-56 object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
-            </div>
-            <div className="overflow-hidden rounded-2xl shadow-sm group">
-              <img src={eventImg4} alt="Getting Support" className="w-full h-48 md:h-56 object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
-            </div>
-          </div>
-        </div>
-      </section>
+     
 
       {/* ─────────── DONATE / VOLUNTEER FOOTER BAND ─────────── */}
       <section 

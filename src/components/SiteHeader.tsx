@@ -17,6 +17,7 @@ const nav = [
   { to: "/support", label: "Seafarer Support" },
   { to: "/get-involved", label: "Get Involved" },
   { to: "/contact", label: "Contact" },
+  { to: "/events", label: "Events" },
 ];
 
 export const SiteHeader = () => {
