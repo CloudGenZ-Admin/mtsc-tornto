@@ -19,12 +19,23 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselPrevious,
+  CarouselNext,
+} from "@/components/ui/carousel";
+
 // Image imports for Gallery & Events
 import eventHeroImg from "@/assets/eventheroimg.avif";
 import eventImg1 from "@/assets/GlipmsOfevents.avif";
 import eventImg2 from "@/assets/GlipmsOfevents2.avif";
 import eventImg3 from "@/assets/GlipmsOfevents3.avif";
 import eventImg4 from "@/assets/GettingSupport.avif";
+import eventImg5 from "@/assets/event6.jpeg";
+import eventImg6 from "@/assets/event7.jpeg";
+import eventImg7 from "@/assets/event8.jpeg";
 import womenInMaritimeImg from "@/assets/newimg/Ho1Honouring Women in Maritime – From Policy to Practice.jpg";
 
 export default function Events() {
@@ -146,7 +157,7 @@ export default function Events() {
         </div>
       </section>
 
-      {/* 3. STORIES FROM OUR EVENTS (GALLERY SECTION) */}
+      {/* 3. STORIES FROM OUR EVENTS (CAROUSEL SECTION) */}
       <section className="pb-20 md:pb-24 pt-10 bg-white">
         <div className="container-page">
           <div className="text-center mb-12">
@@ -155,20 +166,19 @@ export default function Events() {
             </h2>
             <div className="w-24 h-1 bg-coral mx-auto"></div>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-5">
-            <div className="overflow-hidden rounded-2xl shadow-sm group">
-              <img src={eventImg1} alt="Glimpse of events" className="w-full h-48 md:h-56 object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
-            </div>
-            <div className="overflow-hidden rounded-2xl shadow-sm group">
-              <img src={eventImg2} alt="Glimpse of events" className="w-full h-48 md:h-56 object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
-            </div>
-            <div className="overflow-hidden rounded-2xl shadow-sm group">
-              <img src={eventImg3} alt="Glimpse of events" className="w-full h-48 md:h-56 object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
-            </div>
-            <div className="overflow-hidden rounded-2xl shadow-sm group">
-              <img src={eventImg4} alt="Getting Support" className="w-full h-48 md:h-56 object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
-            </div>
-          </div>
+          <Carousel opts={{ align: "start", loop: true }} className="w-full">
+            <CarouselContent className="-ml-4">
+              {[eventImg1, eventImg2, eventImg3, eventImg4, eventImg5, eventImg6, eventImg7].map((img, i) => (
+                <CarouselItem key={i} className="pl-4 basis-1/2 md:basis-1/3 lg:basis-1/4">
+                  <div className="overflow-hidden rounded-2xl shadow-sm group">
+                    <img src={img} alt={`Event moment ${i + 1}`} className="w-full h-48 md:h-56 object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious className="-left-4 md:-left-6" />
+            <CarouselNext className="-right-4 md:-right-6" />
+          </Carousel>
         </div> 
       </section>
 
