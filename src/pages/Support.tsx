@@ -216,7 +216,7 @@ const Support = () => {
   const formContainerRef = useRef<HTMLDivElement>(null);
 
   const quickAccessCards = [
-    { id: 'haircut', icon: Scissors, title: "Book a Haircut", desc: "Book via Zeffy" },
+    { id: 'haircut', icon: Scissors, title: "Book a Haircut", desc: "Book Online" },
     { id: 'barber', icon: MessageCircle, title: "Chat with Barber", desc: "Message on WhatsApp" },
     { id: 'parcel', icon: Package, title: "Send or Receive a Parcel", desc: "Direct to Parcel Portal" },
     { id: 'visit', icon: Ship, title: "Request a Ship Visit", desc: "Schedule a visit" },
@@ -575,7 +575,7 @@ const Support = () => {
           <div className="flex-1 overflow-hidden p-2">
             <div className="w-full h-full bg-white rounded-lg border border-border overflow-hidden">
               <iframe
-                src="https://www.zeffy.com/en-CA/ticketing/toronto-haircut-service"
+                src="https://fadekingzmobilebarber.square.site/"
                 title="Toronto Haircut Service Booking"
                 className="w-full h-full border-none block bg-transparent"
                 allow="payment"

@@ -564,7 +564,7 @@ const Index = () => {
           <div className="flex-1 overflow-hidden p-2">
             <div className="w-full h-full bg-white rounded-lg border border-border overflow-hidden">
               <iframe
-                src="https://www.zeffy.com/en-CA/ticketing/toronto-haircut-service"
+                src="https://fadekingzmobilebarber.square.site/"
                 title="Toronto Haircut Service Booking"
                 className="w-full h-full border-none block bg-transparent"
                 allow="payment"
